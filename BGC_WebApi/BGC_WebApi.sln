@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BGC_WebApi", "BGC_WebApi\BGC_WebApi.csproj", "{44C18071-4D53-4853-8A49-2EEDCFF77356}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BGC_DataAccess", "BGC_DataAccess\BGC_DataAccess.csproj", "{3F09A439-9BCE-4F62-BAB4-8B7BF4B7BB4C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{44C18071-4D53-4853-8A49-2EEDCFF77356}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44C18071-4D53-4853-8A49-2EEDCFF77356}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44C18071-4D53-4853-8A49-2EEDCFF77356}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44C18071-4D53-4853-8A49-2EEDCFF77356}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F09A439-9BCE-4F62-BAB4-8B7BF4B7BB4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F09A439-9BCE-4F62-BAB4-8B7BF4B7BB4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F09A439-9BCE-4F62-BAB4-8B7BF4B7BB4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F09A439-9BCE-4F62-BAB4-8B7BF4B7BB4C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FF1F053F-386A-4295-862D-1C535662C51E}
+	EndGlobalSection
+EndGlobal
