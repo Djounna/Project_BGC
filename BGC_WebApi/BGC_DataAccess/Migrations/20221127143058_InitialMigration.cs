@@ -88,7 +88,7 @@ namespace BGCDataAccess.Migrations
                     MaxNumberPlayers = table.Column<int>(type: "int", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
                     Length = table.Column<int>(type: "int", nullable: true),
-                    OrganizerMemberId = table.Column<int>(type: "int", nullable: false),
+                    OrganizerId = table.Column<int>(type: "int", nullable: true),
                     TableGameTableId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -101,11 +101,10 @@ namespace BGCDataAccess.Migrations
                         principalColumn: "GameTableId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_GameSessions_Members_OrganizerMemberId",
-                        column: x => x.OrganizerMemberId,
+                        name: "FK_GameSessions_Members_OrganizerId",
+                        column: x => x.OrganizerId,
                         principalTable: "Members",
-                        principalColumn: "MemberId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "MemberId");
                 });
 
             migrationBuilder.CreateTable(
@@ -116,17 +115,16 @@ namespace BGCDataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OrganizerMemberId = table.Column<int>(type: "int", nullable: false)
+                    OrganizerId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_RpgCampaigns", x => x.RpgCampaignId);
                     table.ForeignKey(
-                        name: "FK_RpgCampaigns_Members_OrganizerMemberId",
-                        column: x => x.OrganizerMemberId,
+                        name: "FK_RpgCampaigns_Members_OrganizerId",
+                        column: x => x.OrganizerId,
                         principalTable: "Members",
-                        principalColumn: "MemberId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "MemberId");
                 });
 
             migrationBuilder.CreateTable(
@@ -161,7 +159,7 @@ namespace BGCDataAccess.Migrations
                 {
                     GameSessionRegistrationId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    playerMemberId = table.Column<int>(type: "int", nullable: false),
+                    MemberId = table.Column<int>(type: "int", nullable: false),
                     GameSessionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -174,8 +172,8 @@ namespace BGCDataAccess.Migrations
                         principalColumn: "GameSessionId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_GameSessionRegistrations_Members_playerMemberId",
-                        column: x => x.playerMemberId,
+                        name: "FK_GameSessionRegistrations_Members_MemberId",
+                        column: x => x.MemberId,
                         principalTable: "Members",
                         principalColumn: "MemberId",
                         onDelete: ReferentialAction.Cascade);
@@ -187,21 +185,21 @@ namespace BGCDataAccess.Migrations
                 {
                     RpgCampaignRegistrationId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PlayerMemberId = table.Column<int>(type: "int", nullable: false),
-                    CampaignRpgCampaignId = table.Column<int>(type: "int", nullable: false)
+                    MemberId = table.Column<int>(type: "int", nullable: false),
+                    RpgCampaignId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_RpgCampaignRegistrations", x => x.RpgCampaignRegistrationId);
                     table.ForeignKey(
-                        name: "FK_RpgCampaignRegistrations_Members_PlayerMemberId",
-                        column: x => x.PlayerMemberId,
+                        name: "FK_RpgCampaignRegistrations_Members_MemberId",
+                        column: x => x.MemberId,
                         principalTable: "Members",
                         principalColumn: "MemberId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_RpgCampaignRegistrations_RpgCampaigns_CampaignRpgCampaignId",
-                        column: x => x.CampaignRpgCampaignId,
+                        name: "FK_RpgCampaignRegistrations_RpgCampaigns_RpgCampaignId",
+                        column: x => x.RpgCampaignId,
                         principalTable: "RpgCampaigns",
                         principalColumn: "RpgCampaignId",
                         onDelete: ReferentialAction.Cascade);
@@ -279,14 +277,14 @@ namespace BGCDataAccess.Migrations
                 column: "GameSessionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GameSessionRegistrations_playerMemberId",
+                name: "IX_GameSessionRegistrations_MemberId",
                 table: "GameSessionRegistrations",
-                column: "playerMemberId");
+                column: "MemberId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GameSessions_OrganizerMemberId",
+                name: "IX_GameSessions_OrganizerId",
                 table: "GameSessions",
-                column: "OrganizerMemberId");
+                column: "OrganizerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_GameSessions_TableGameTableId",
@@ -299,19 +297,20 @@ namespace BGCDataAccess.Migrations
                 column: "GameId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RpgCampaignRegistrations_CampaignRpgCampaignId",
+                name: "IX_RpgCampaignRegistrations_MemberId",
                 table: "RpgCampaignRegistrations",
-                column: "CampaignRpgCampaignId");
+                column: "MemberId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RpgCampaignRegistrations_PlayerMemberId",
+                name: "IX_RpgCampaignRegistrations_RpgCampaignId",
                 table: "RpgCampaignRegistrations",
-                column: "PlayerMemberId");
+                column: "RpgCampaignId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_RpgCampaigns_OrganizerMemberId",
+                name: "IX_RpgCampaigns_OrganizerId",
                 table: "RpgCampaigns",
-                column: "OrganizerMemberId");
+                column: "OrganizerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RpgSessionGames_GameVersionId",

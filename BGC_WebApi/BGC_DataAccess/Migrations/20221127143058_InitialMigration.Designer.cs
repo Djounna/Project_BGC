@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BGCDataAccess.Migrations
 {
     [DbContext(typeof(BGCContext))]
-    [Migration("20221120185119_InitialMigration")]
+    [Migration("20221127143058_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -75,7 +75,7 @@ namespace BGCDataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OrganizerMemberId")
+                    b.Property<int?>("OrganizerId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Schedule")
@@ -89,7 +89,7 @@ namespace BGCDataAccess.Migrations
 
                     b.HasKey("GameSessionId");
 
-                    b.HasIndex("OrganizerMemberId");
+                    b.HasIndex("OrganizerId");
 
                     b.HasIndex("TableGameTableId");
 
@@ -130,14 +130,14 @@ namespace BGCDataAccess.Migrations
                     b.Property<int>("GameSessionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("playerMemberId")
+                    b.Property<int>("MemberId")
                         .HasColumnType("int");
 
                     b.HasKey("GameSessionRegistrationId");
 
                     b.HasIndex("GameSessionId");
 
-                    b.HasIndex("playerMemberId");
+                    b.HasIndex("MemberId");
 
                     b.ToTable("GameSessionRegistrations");
                 });
@@ -220,12 +220,12 @@ namespace BGCDataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OrganizerMemberId")
+                    b.Property<int?>("OrganizerId")
                         .HasColumnType("int");
 
                     b.HasKey("RpgCampaignId");
 
-                    b.HasIndex("OrganizerMemberId");
+                    b.HasIndex("OrganizerId");
 
                     b.ToTable("RpgCampaigns");
                 });
@@ -238,17 +238,18 @@ namespace BGCDataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RpgCampaignRegistrationId"));
 
-                    b.Property<int>("CampaignRpgCampaignId")
+                    b.Property<int>("MemberId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PlayerMemberId")
+                    b.Property<int>("RpgCampaignId")
                         .HasColumnType("int");
 
                     b.HasKey("RpgCampaignRegistrationId");
 
-                    b.HasIndex("CampaignRpgCampaignId");
+                    b.HasIndex("MemberId");
 
-                    b.HasIndex("PlayerMemberId");
+                    b.HasIndex("RpgCampaignId")
+                        .IsUnique();
 
                     b.ToTable("RpgCampaignRegistrations");
                 });
@@ -315,13 +316,11 @@ namespace BGCDataAccess.Migrations
             modelBuilder.Entity("BGC_DataAccess.Entities.GameSession", b =>
                 {
                     b.HasOne("BGC_DataAccess.Entities.Member", "Organizer")
-                        .WithMany()
-                        .HasForeignKey("OrganizerMemberId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("GameSessions")
+                        .HasForeignKey("OrganizerId");
 
                     b.HasOne("BGC_DataAccess.Entities.GameTable", "Table")
-                        .WithMany()
+                        .WithMany("GameSessions")
                         .HasForeignKey("TableGameTableId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -340,7 +339,7 @@ namespace BGCDataAccess.Migrations
                         .IsRequired();
 
                     b.HasOne("BGC_DataAccess.Entities.GameVersion", "GameVersion")
-                        .WithMany()
+                        .WithMany("GameSessionGames")
                         .HasForeignKey("GameVersionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -358,21 +357,21 @@ namespace BGCDataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BGC_DataAccess.Entities.Member", "player")
-                        .WithMany()
-                        .HasForeignKey("playerMemberId")
+                    b.HasOne("BGC_DataAccess.Entities.Member", "Player")
+                        .WithMany("GameSessionRegistrations")
+                        .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("GameSession");
 
-                    b.Navigation("player");
+                    b.Navigation("Player");
                 });
 
             modelBuilder.Entity("BGC_DataAccess.Entities.GameVersion", b =>
                 {
                     b.HasOne("BGC_DataAccess.Entities.Game", "Game")
-                        .WithMany()
+                        .WithMany("Versions")
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -383,43 +382,41 @@ namespace BGCDataAccess.Migrations
             modelBuilder.Entity("BGC_DataAccess.Entities.RpgCampaign", b =>
                 {
                     b.HasOne("BGC_DataAccess.Entities.Member", "Organizer")
-                        .WithMany()
-                        .HasForeignKey("OrganizerMemberId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("RpgCampaigns")
+                        .HasForeignKey("OrganizerId");
 
                     b.Navigation("Organizer");
                 });
 
             modelBuilder.Entity("BGC_DataAccess.Entities.RpgCampaignRegistration", b =>
                 {
-                    b.HasOne("BGC_DataAccess.Entities.RpgCampaign", "Campaign")
-                        .WithMany()
-                        .HasForeignKey("CampaignRpgCampaignId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("BGC_DataAccess.Entities.Member", "Player")
-                        .WithMany()
-                        .HasForeignKey("PlayerMemberId")
+                        .WithMany("RpgCampaignRegistrations")
+                        .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Campaign");
+                    b.HasOne("BGC_DataAccess.Entities.RpgCampaign", "RpgCampaign")
+                        .WithOne("RpgCampaignRegistration")
+                        .HasForeignKey("BGC_DataAccess.Entities.RpgCampaignRegistration", "RpgCampaignId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Player");
+
+                    b.Navigation("RpgCampaign");
                 });
 
             modelBuilder.Entity("BGC_DataAccess.Entities.RpgSession", b =>
                 {
                     b.HasOne("BGC_DataAccess.Entities.RpgCampaign", "Campaign")
-                        .WithMany()
+                        .WithMany("Sessions")
                         .HasForeignKey("CampaignRpgCampaignId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("BGC_DataAccess.Entities.GameTable", "Table")
-                        .WithMany()
+                        .WithMany("RpgSessions")
                         .HasForeignKey("TableGameTableId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -432,7 +429,7 @@ namespace BGCDataAccess.Migrations
             modelBuilder.Entity("BGC_DataAccess.Entities.RpgSessionGame", b =>
                 {
                     b.HasOne("BGC_DataAccess.Entities.GameVersion", "GameVersion")
-                        .WithMany()
+                        .WithMany("RpgSessionGames")
                         .HasForeignKey("GameVersionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -446,6 +443,44 @@ namespace BGCDataAccess.Migrations
                     b.Navigation("GameVersion");
 
                     b.Navigation("RpgSession");
+                });
+
+            modelBuilder.Entity("BGC_DataAccess.Entities.Game", b =>
+                {
+                    b.Navigation("Versions");
+                });
+
+            modelBuilder.Entity("BGC_DataAccess.Entities.GameTable", b =>
+                {
+                    b.Navigation("GameSessions");
+
+                    b.Navigation("RpgSessions");
+                });
+
+            modelBuilder.Entity("BGC_DataAccess.Entities.GameVersion", b =>
+                {
+                    b.Navigation("GameSessionGames");
+
+                    b.Navigation("RpgSessionGames");
+                });
+
+            modelBuilder.Entity("BGC_DataAccess.Entities.Member", b =>
+                {
+                    b.Navigation("GameSessionRegistrations");
+
+                    b.Navigation("GameSessions");
+
+                    b.Navigation("RpgCampaignRegistrations");
+
+                    b.Navigation("RpgCampaigns");
+                });
+
+            modelBuilder.Entity("BGC_DataAccess.Entities.RpgCampaign", b =>
+                {
+                    b.Navigation("RpgCampaignRegistration")
+                        .IsRequired();
+
+                    b.Navigation("Sessions");
                 });
 #pragma warning restore 612, 618
         }

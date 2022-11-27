@@ -12,6 +12,9 @@ public class GameTable
 {
     public int GameTableId { get; set; }
     public int Size { get; set; }
+
+    public ICollection<GameSession> GameSessions { get; set;}
+    public ICollection<RpgSession> RpgSessions { get; set;}
 }
 
 public class GameTableConfiguration : IEntityTypeConfiguration<GameTable>

@@ -22,6 +22,7 @@ public class GameSession
     public SessionStatus Status { get; set; }
     public int? Length { get; set; }
 
+    public int? OrganizerId { get; set; }
     public Member Organizer { get; set; }
     public GameTable Table { get; set; }
 }

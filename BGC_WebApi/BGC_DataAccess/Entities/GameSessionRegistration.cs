@@ -11,7 +11,10 @@ public class GameSessionRegistration
 {
     public int GameSessionRegistrationId { get; set; }
     
-    public Member player { get; set; }
+    public int MemberId { get; set; }
+    public Member Player { get; set; }
+
+    public int GameSessionId { get; set; }  
     public GameSession GameSession { get; set; }
 }
 
@@ -20,6 +23,6 @@ public class GameSessionRegistrationConfiguration : IEntityTypeConfiguration<Gam
     public void Configure(EntityTypeBuilder<GameSessionRegistration> builder)
     {
         builder.Property(g => g.GameSession).IsRequired();
-        builder.Property(g => g.player).IsRequired();
+        builder.Property(g => g.Player).IsRequired();
     }
 }

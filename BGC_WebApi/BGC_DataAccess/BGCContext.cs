@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 namespace BGC_DataAccess;
 public class BGCContext : DbContext
 {
+    public BGCContext() : base() { }
+
     public DbSet<Member> Members { get; set; }
     public DbSet<Game> Games { get; set; }
     public DbSet<GameVersion> GameVersions { get; set; }
@@ -23,6 +25,6 @@ public class BGCContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer(@"Server=LAPTOP-R3GDQJIT;Database=BoardGameClub;Integrated Security=True;");
+        optionsBuilder.UseSqlServer(@"Data Source=LAPTOP-R3GDQJIT;Initial Catalog=BoardGameClub;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;");
     }
 }

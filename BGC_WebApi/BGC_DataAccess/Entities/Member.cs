@@ -15,6 +15,12 @@ public class Member
     public string Email { get; set; }
     public string Password { get; set; }
     public string Role { get; set; }  // TO DO : to change when adding Role&Permission 
+
+    public ICollection<RpgCampaign> RpgCampaigns { get;set; }
+    public ICollection<GameSession> GameSessions { get; set; }
+
+    public ICollection<RpgCampaignRegistration> RpgCampaignRegistrations { get; set; }
+    public ICollection<GameSessionRegistration> GameSessionRegistrations { get; set; }
 }
 
 public class MemberConfiguration : IEntityTypeConfiguration<Member>
@@ -25,5 +31,6 @@ public class MemberConfiguration : IEntityTypeConfiguration<Member>
         builder.Property(m => m.Password).IsRequired().HasMaxLength(50);
         builder.Property(m => m.Email).IsRequired().HasMaxLength(50);
         builder.Property(m => m.Role).IsRequired(); // TO DO : to change when adding Role&Permission
+
     }
 }
