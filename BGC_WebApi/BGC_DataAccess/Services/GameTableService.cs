@@ -1,4 +1,5 @@
 ﻿using BGC_DataAccess.Entities;
+using BGC_DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BGC_DataAccess.Services;
-public class GameTableService : BaseService
+public class GameTableService : BaseService, IGameTableService
 {
     public GameTableService(BGCContext context) : base(context) { }
 
@@ -29,9 +30,9 @@ public class GameTableService : BaseService
 
     public bool Update(int id, GameTable gameTable)
     {
-        GameTable GameTableToUpdate = BgcContext.GameTables.Find(id);
+        GameTable toUpdate = BgcContext.GameTables.Find(id);
 
-        if (GameTableToUpdate != null)
+        if (toUpdate != null)
         {
             // TO DO
 
@@ -44,10 +45,10 @@ public class GameTableService : BaseService
 
     public bool Delete(int id)
     {
-        GameTable GameTableToDelete = BgcContext.GameTables.Find(id);
-        if (GameTableToDelete != null)
+        GameTable toDelete = BgcContext.GameTables.Find(id);
+        if (toDelete != null)
         {
-            BgcContext.GameTables.Remove(GameTableToDelete);
+            BgcContext.GameTables.Remove(toDelete);
             BgcContext.SaveChanges();
             return true;
         }

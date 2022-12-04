@@ -1,4 +1,5 @@
 ﻿using BGC_DataAccess.Entities;
+using BGC_DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BGC_DataAccess.Services;
-public class GameService : BaseService
+public class GameService : BaseService, IGameService
 {
     public GameService(BGCContext context) : base(context) { }
 
@@ -36,7 +37,7 @@ public class GameService : BaseService
             GameToUpdate.Name = game.Name;
             GameToUpdate.MaxNumberPlayers = game.MaxNumberPlayers;
             GameToUpdate.MinNumberPlayers = game.MinNumberPlayers;
-          
+
             BgcContext.SaveChanges();
             return true;
         }

@@ -1,4 +1,5 @@
 ﻿using BGC_DataAccess.Entities;
+using BGC_DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BGC_DataAccess.Services;
-public class GameVersionService : BaseService
+public class GameVersionService : BaseService, IGameVersionService
 {
     public GameVersionService(BGCContext context) : base(context) { }
 
@@ -29,9 +30,9 @@ public class GameVersionService : BaseService
 
     public bool Update(int id, GameVersion gameVersion)
     {
-        GameVersion GameVersionToUpdate = BgcContext.GameVersions.Find(id);
+        GameVersion toUpdate = BgcContext.GameVersions.Find(id);
 
-        if (GameVersionToUpdate != null)
+        if (toUpdate != null)
         {
             //TO DO
 
@@ -43,10 +44,10 @@ public class GameVersionService : BaseService
 
     public bool Delete(int id)
     {
-        GameVersion GameVersionToDelete = BgcContext.GameVersions.Find(id);
-        if (GameVersionToDelete != null)
+        GameVersion toDelete = BgcContext.GameVersions.Find(id);
+        if (toDelete != null)
         {
-            BgcContext.GameVersions.Remove(GameVersionToDelete);
+            BgcContext.GameVersions.Remove(toDelete);
             BgcContext.SaveChanges();
             return true;
         }

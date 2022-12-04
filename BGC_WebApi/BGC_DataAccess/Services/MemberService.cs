@@ -30,13 +30,13 @@ public class MemberService : BaseService, IMemberService
 
     public bool Update(int id, Member member)
     {
-        Member memberToUpdate = BgcContext.Members.Find(id);
+        Member toUpdate = BgcContext.Members.Find(id);
 
-        if (memberToUpdate != null)
+        if (toUpdate != null)
         {
             //memberToUpdate.Role = member.Role;
             //memberToUpdate.Name = member.Name;
-            memberToUpdate.Email = member.Email;
+            toUpdate.Email = member.Email;
             //memberToUpdate.Password = member.Password;
 
             //BgcContext.Members.Update(member); // Not necessary
@@ -48,10 +48,10 @@ public class MemberService : BaseService, IMemberService
 
     public bool Delete(int id)
     {
-        Member memberToDelete = BgcContext.Members.Find(id);
-        if (memberToDelete != null)
+        Member toDelete = BgcContext.Members.Find(id);
+        if (toDelete != null)
         {
-            BgcContext.Members.Remove(memberToDelete);
+            BgcContext.Members.Remove(toDelete);
             BgcContext.SaveChanges();
             return true;
         }
