@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = BGC_DataAccess
-build_property.ProjectDir = c:\Users\Corentin\Documents\CODE\Projet_Ephec_INTEGRATION\Project_BGC\BGC_WebApi\BGC_DataAccess\
+build_property.ProjectDir = C:\Users\Corentin\Documents\CODE\Projet_Ephec_INTEGRATION\Project_BGC\BGC_WebApi\BGC_DataAccess\
