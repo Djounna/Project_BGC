@@ -1,6 +1,8 @@
+using BGC_BusinessLogic.Configuration;
 using BGC_DataAccess;
 using BGC_DataAccess.Interfaces;
 using BGC_DataAccess.Services;
+using BGC_WebApi.Configuration;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,6 +32,21 @@ builder.Services.AddScoped<IRpgSessionGameService,RpgSessionGameService> ();
 builder.Services.AddScoped<IRpgSessionService,RpgSessionService>();
 builder.Services.AddScoped<IGameTableService,GameTableService>();
 
+//  Services : Business
+//builder.Services.AddScoped<IMemberBLL, MemberBLL>();
+//builder.Services.AddScoped<IGameBLL, GameBLL>();
+//builder.Services.AddScoped<IGameSessionGameBLL, GameSessionGameBLL>();
+//builder.Services.AddScoped<IGameSessionBLL, GameSessionBLL>();
+//builder.Services.AddScoped<IGameSessionRegistrationBLL, GameSessionRegistrationBLL>();
+//builder.Services.AddScoped<IGameVersionBLL, GameVersionBLL>();
+//builder.Services.AddScoped<IRpgCampaignRegistrationBLL, RpgCampaignRegistrationBLL>();
+//builder.Services.AddScoped<IRpgCampaignBLL, RpgCampaignBLL>();
+//builder.Services.AddScoped<IRpgSessionGameBLL, RpgSessionGameBLL>();
+//builder.Services.AddScoped<IRpgSessionBLL, RpgSessionBLL>();
+//builder.Services.AddScoped<IGameTableBLL, GameTableBLL>();
+
+// AutoMapper
+builder.Services.AddAutoMapper(typeof(APIMappingProfile), typeof(BLLMappingProfile));
 
 
 var app = builder.Build();

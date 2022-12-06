@@ -5,6 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BGC_BusinessLogic.Models;
-internal class GameTableModel
+public class GameTableModel
 {
 }
