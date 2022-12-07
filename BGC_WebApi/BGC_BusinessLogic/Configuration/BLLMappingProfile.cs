@@ -12,16 +12,16 @@ public class BLLMappingProfile : Profile
 {
     public BLLMappingProfile() 
     {
-        CreateMap<Game, GameModel>();
-        CreateMap<GameVersion, GameVersionModel>();
-        CreateMap<GameSession, GameSessionModel>();
-        CreateMap<GameSessionGame, GameSessionGameModel>();
-        CreateMap<GameTable, GameTableModel>();
-        CreateMap<RpgCampaign, RpgCampaignModel>();
-        CreateMap<RpgSession, RpgSessionModel>();
-        CreateMap<GameSessionRegistration, GameSessionRegistrationModel>();
-        CreateMap<RpgCampaignRegistration, RpgCampaignRegistrationModel>();
-        CreateMap<RpgSessionGame, RpgSessionGameModel>();
-        CreateMap<Member, MemberModel>();
+        CreateMap<Game, GameModel>().ReverseMap();
+        CreateMap<GameVersion, GameVersionModel>().ReverseMap();
+        CreateMap<GameSession, GameSessionModel>().ReverseMap();
+        CreateMap<GameSessionGame, GameSessionGameModel>().ReverseMap();
+        CreateMap<GameTable, GameTableModel>().ReverseMap();
+        CreateMap<RpgCampaign, RpgCampaignModel>().ReverseMap();
+        CreateMap<RpgSession, RpgSessionModel>().ReverseMap();
+        CreateMap<GameSessionRegistration, GameSessionRegistrationModel>().ReverseMap();
+        CreateMap<RpgCampaignRegistration, RpgCampaignRegistrationModel>().ReverseMap();
+        CreateMap<RpgSessionGame, RpgSessionGameModel>().ReverseMap();
+        CreateMap<Member, MemberModel>().ReverseMap();
     }
 }
