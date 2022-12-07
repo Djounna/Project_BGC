@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace BGC_DataAccess;
 public class BGCContext : DbContext
 {
-    public BGCContext() : base() { }
+    public BGCContext(DbContextOptions<BGCContext> options) : base(options) { }
 
     public DbSet<Member> Members { get; set; }
     public DbSet<Game> Games { get; set; }
