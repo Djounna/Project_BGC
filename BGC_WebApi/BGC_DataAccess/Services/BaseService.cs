@@ -14,11 +14,4 @@ public class BaseService
     {
         BgcContext = context;
     }
-
-
-    //public TEntity GetById<TEntity>(int id)
-    //{
-    //    return BgcContext.Set<TEntity>().Find(id);
-    //}
-
 }

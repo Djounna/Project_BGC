@@ -2,6 +2,7 @@
 using BGC_DataAccess.Entities;
 using BGC_DataAccess.Services;
 using BGC_WebApi.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BGC_WebApi.Controllers;
@@ -9,12 +10,13 @@ namespace BGC_WebApi.Controllers;
 /// <summary>
 /// Controller for Games
 /// </summary>
+[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class GameController : ControllerBase
 {
-    IMapper mapper;
-    GameService gameService;
+    private IMapper mapper;
+    private GameService gameService;
 
     public GameController(GameService gameService, IMapper mapper)
     {
