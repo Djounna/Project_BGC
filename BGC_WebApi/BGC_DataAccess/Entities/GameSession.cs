@@ -24,7 +24,12 @@ public class GameSession
 
     public int? OrganizerId { get; set; }
     public Member Organizer { get; set; }
-    public GameTable Table { get; set; }
+
+    public int? GameTableId { get; set; }
+    public GameTable GameTable { get; set; }
+
+    public ICollection<GameSessionRegistration> GameSessionRegistrations { get; set; }
+    public ICollection<GameSessionGame> GamesSessionGames { get; set; }
 }
 
 public class GameSessionConfiguration : IEntityTypeConfiguration<GameSession>

@@ -18,5 +18,6 @@ public class GameSessionDTO
 
     public int? OrganizerId { get; set; }
     public Member Organizer { get; set; }
+    public int? GameTableId { get; set; }
     public GameTable Table { get; set; }
 }

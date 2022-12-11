@@ -11,6 +11,7 @@ public class GameVersion
 {
     public int GameVersionId { get; set; }
     
+    public int GameId { get; set; } 
     public Game Game { get; set; }
 
     public ICollection<GameSessionGame> GameSessionGames { get; set; }

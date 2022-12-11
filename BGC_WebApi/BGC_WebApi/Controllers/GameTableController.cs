@@ -57,7 +57,7 @@ public class GameTableController : ControllerBase
     [HttpPut]
     public IActionResult Put(int id, [FromBody] GameTableDTO GameTableDTO)
     {
-        GameTableService.Update(id, mapper.Map<GameTable>(GameTableDTO));
+        gameTableService.Update(id, mapper.Map<GameTable>(GameTableDTO));
         return Ok();
     }
 

@@ -8,10 +8,9 @@ public class RpgCampaignDTO
     public string Name { get; set; }
     public string? Description { get; set; }
 
-    public RpgCampaignRegistration RpgCampaignRegistration { get; set; }
-
     public int? OrganizerId { get; set; }
     public Member Organizer { get; set; }
 
-    public ICollection<RpgSession> Sessions { get; set; }
+    //public ICollection<RpgSession> Sessions { get; set; }
+    //public ICollection<RpgCampaignRegistration> RpgCampaignRegistrations { get; set; }
 }

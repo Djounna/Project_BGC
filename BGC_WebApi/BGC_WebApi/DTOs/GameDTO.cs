@@ -11,5 +11,5 @@ public class GameDTO
     public int? MinNumberPlayers { get; set; }
     public int? MaxNumberPlayers { get; set; }
 
-    public ICollection<GameVersion> Versions { get; set; }
+    //public ICollection<GameVersion> Versions { get; set; }
 }

@@ -1,4 +1,4 @@
-﻿async using BGC_DataAccess.Entities;
+﻿using BGC_DataAccess.Entities;
 using BGC_DataAccess.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;

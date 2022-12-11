@@ -13,8 +13,13 @@ public class RpgSession
     
     public SessionStatus Status { get; set; }
 
+    public int RpgCampaignId { get; set; }
     public RpgCampaign Campaign { get; set; }
+
+    public int? GameTableId { get; set; }
     public GameTable Table { get; set; }
+
+    public ICollection<RpgSessionGame> RpgSessionGames { get; set; }
 }
 
 public class RpgSessionConfiguration : IEntityTypeConfiguration<RpgSession>

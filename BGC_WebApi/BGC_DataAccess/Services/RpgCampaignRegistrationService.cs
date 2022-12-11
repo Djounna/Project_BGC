@@ -1,5 +1,6 @@
 ﻿using BGC_DataAccess.Entities;
 using BGC_DataAccess.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ public class RpgCampaignRegistrationService : BaseService, IRpgCampaignRegistrat
 
     public async Task<IEnumerable<RpgCampaignRegistration>> GetAll()
     {
-        return await BgcContext.RpgCampaignRegistrations.ToLisAsync();
+        return await BgcContext.RpgCampaignRegistrations.ToListAsync();
     }
 
     public async Task<bool> Insert(RpgCampaignRegistration RpgCampaignRegistration)

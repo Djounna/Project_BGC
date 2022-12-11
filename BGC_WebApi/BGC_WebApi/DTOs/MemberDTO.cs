@@ -10,9 +10,9 @@ public class MemberDTO
     public string Password { get; set; }
     public string Role { get; set; }  // TO DO : to change when adding Role&Permission 
 
-    public ICollection<RpgCampaign> RpgCampaigns { get; set; }
-    public ICollection<GameSession> GameSessions { get; set; }
+    //public ICollection<RpgCampaign> RpgCampaigns { get; set; }
+    //public ICollection<GameSession> GameSessions { get; set; }
 
-    public ICollection<RpgCampaignRegistration> RpgCampaignRegistrations { get; set; }
-    public ICollection<GameSessionRegistration> GameSessionRegistrations { get; set; }
+    //public ICollection<RpgCampaignRegistration> RpgCampaignRegistrations { get; set; }
+    //public ICollection<GameSessionRegistration> GameSessionRegistrations { get; set; }
 }
