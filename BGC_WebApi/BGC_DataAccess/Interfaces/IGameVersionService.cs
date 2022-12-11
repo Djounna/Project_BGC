@@ -3,9 +3,9 @@
 namespace BGC_DataAccess.Interfaces;
 public interface IGameVersionService
 {
-    bool Delete(int id);
-    IEnumerable<GameVersion> GetAll();
-    GameVersion GetById(int id);
-    void Insert(GameVersion gameVersion);
-    bool Update(int id, GameVersion gameVersion);
+    Task<bool> Delete(int id); 
+    Task<IEnumerable<GameVersion>> GetAll(); 
+    Task<GameVersion> GetById(int id); 
+    Task<bool> Insert(GameVersion gameVersion); 
+    Task<bool> Update(int id, GameVersion gameVersion);
 }

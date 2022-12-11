@@ -3,9 +3,9 @@
 namespace BGC_DataAccess.Interfaces;
 public interface IMemberService
 {
-    Member GetById(int id);
-    IEnumerable<Member> GetAll();
-    void Insert(Member member);
-    bool Update(int id, Member member);
-    bool Delete(int id);
+    Task<Member> GetById(int id);
+    Task<IEnumerable<Member>> GetAll();
+    Task<bool> Insert(Member member);
+    Task<bool> Update(int id, Member member);
+    Task<bool> Delete(int id);
 }

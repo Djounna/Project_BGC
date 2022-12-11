@@ -1,5 +1,6 @@
 ﻿using BGC_DataAccess.Entities;
 using BGC_DataAccess.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,23 +12,23 @@ public class GameService : BaseService, IGameService
 {
     public GameService(BGCContext context) : base(context) { }
 
-    public Game GetById(int id)
+    public async Task<Game> GetById(int id)
     {
-        return BgcContext.Games.Find(id);
+        return await BgcContext.Games.FindAsync(id);
     }
 
-    public IEnumerable<Game> GetAll()
+    public async Task<IEnumerable<Game>> GetAll()
     {
-        return BgcContext.Games.ToList();
+        return await BgcContext.Games.ToListAsync();
     }
 
-    public void Insert(Game game)
+    public async Task<bool> Insert(Game game)
     {
         BgcContext.Games.Add(game);
-        BgcContext.SaveChanges();
+        return await BgcContext.SaveChangesAsync() >= 1;
     }
 
-    public bool Update(int id, Game game)
+    public async Task<bool> Update(int id, Game game)
     {
         Game GameToUpdate = BgcContext.Games.Find(id);
 
@@ -38,20 +39,19 @@ public class GameService : BaseService, IGameService
             GameToUpdate.MaxNumberPlayers = game.MaxNumberPlayers;
             GameToUpdate.MinNumberPlayers = game.MinNumberPlayers;
 
-            BgcContext.SaveChanges();
-            return true;
+            return await BgcContext.SaveChangesAsync() >=1;
+            
         }
         return false;
     }
 
-    public bool Delete(int id)
+    public async Task<bool> Delete(int id)
     {
         Game GameToDelete = BgcContext.Games.Find(id);
         if (GameToDelete != null)
         {
             BgcContext.Games.Remove(GameToDelete);
-            BgcContext.SaveChanges();
-            return true;
+            return await BgcContext.SaveChangesAsync() >=1;
         }
         return false;
     }

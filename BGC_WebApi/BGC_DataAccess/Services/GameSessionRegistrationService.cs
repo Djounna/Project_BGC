@@ -1,5 +1,6 @@
 ﻿using BGC_DataAccess.Entities;
 using BGC_DataAccess.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,23 +12,23 @@ public class GameSessionRegistrationService : BaseService, IGameSessionRegistrat
 {
     public GameSessionRegistrationService(BGCContext context) : base(context) { }
 
-    public GameSessionRegistration GetById(int id)
+    public async Task<GameSessionRegistration> GetById(int id)
     {
-        return BgcContext.GameSessionRegistrations.Find(id);
+        return await BgcContext.GameSessionRegistrations.FindAsync(id);
     }
 
-    public IEnumerable<GameSessionRegistration> GetAll()
+    public async Task<IEnumerable<GameSessionRegistration>> GetAll()
     {
-        return BgcContext.GameSessionRegistrations.ToList();
+        return await BgcContext.GameSessionRegistrations.ToListAsync();
     }
 
-    public void Insert(GameSessionRegistration gameSessionRegistration)
+    public async Task<bool> Insert(GameSessionRegistration gameSessionRegistration)
     {
         BgcContext.GameSessionRegistrations.Add(gameSessionRegistration);
-        BgcContext.SaveChanges();
+        return await BgcContext.SaveChangesAsync() >=1;
     }
 
-    public bool Update(int id, GameSessionRegistration gameSessionRegistration)
+    public async Task<bool> Update(int id, GameSessionRegistration gameSessionRegistration)
     {
         GameSessionRegistration ToUpdate = BgcContext.GameSessionRegistrations.Find(id);
 
@@ -36,20 +37,18 @@ public class GameSessionRegistrationService : BaseService, IGameSessionRegistrat
             ToUpdate.GameSessionId = gameSessionRegistration.GameSessionId;
             ToUpdate.MemberId = gameSessionRegistration.MemberId;
 
-            BgcContext.SaveChanges();
-            return true;
+            return await BgcContext.SaveChangesAsync() >=1;
         }
         return false;
     }
 
-    public bool Delete(int id)
+    public async Task<bool> Delete(int id)
     {
-        GameSessionRegistration ToDelete = BgcContext.GameSessionRegistrations.Find(id);
+        GameSessionRegistration ToDelete = await BgcContext.GameSessionRegistrations.FindAsync(id);
         if (ToDelete != null)
         {
             BgcContext.GameSessionRegistrations.Remove(ToDelete);
-            BgcContext.SaveChanges();
-            return true;
+            return await BgcContext.SaveChangesAsync() >=1;
         }
         return false;
     }

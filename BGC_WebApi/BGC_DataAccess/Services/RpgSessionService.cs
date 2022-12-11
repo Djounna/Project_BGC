@@ -1,5 +1,6 @@
 ﻿using BGC_DataAccess.Entities;
 using BGC_DataAccess.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,45 +12,41 @@ public class RpgSessionService : BaseService, IRpgSessionService
 {
     public RpgSessionService(BGCContext context) : base(context) { }
 
-    public RpgSession GetById(int id)
+    public async Task<RpgSession> GetById(int id)
     {
-        return BgcContext.RpgSessions.Find(id);
+        return await BgcContext.RpgSessions.FindAsync(id);
     }
 
-    public IEnumerable<RpgSession> GetAll()
+    public async Task<IEnumerable<RpgSession>> GetAll()
     {
-        return BgcContext.RpgSessions.ToList();
+        return await BgcContext.RpgSessions.ToListAsync();
     }
 
-    public void Insert(RpgSession RpgSession)
+    public async Task<bool> Insert(RpgSession RpgSession)
     {
         BgcContext.RpgSessions.Add(RpgSession);
-        BgcContext.SaveChanges();
+        return await BgcContext.SaveChangesAsync() >=1;
     }
 
-    public bool Update(int id, RpgSession RpgSession)
+    public async Task<bool> Update(int id, RpgSession RpgSession)
     {
-        RpgSession toUpdate = BgcContext.RpgSessions.Find(id);
+        RpgSession toUpdate = await BgcContext.RpgSessions.FindAsync(id);
 
         if (toUpdate != null)
         {
             // TO DO
-
-
-            BgcContext.SaveChanges();
-            return true;
+            return await BgcContext.SaveChangesAsync() >=1;
         }
         return false;
     }
 
-    public bool Delete(int id)
+    public async Task<bool> Delete(int id)
     {
-        RpgSession toDelete = BgcContext.RpgSessions.Find(id);
+        RpgSession toDelete = await BgcContext.RpgSessions.FindAsync(id);
         if (toDelete != null)
         {
             BgcContext.RpgSessions.Remove(toDelete);
-            BgcContext.SaveChanges();
-            return true;
+            return await BgcContext.SaveChangesAsync() >=1;
         }
         return false;
     }

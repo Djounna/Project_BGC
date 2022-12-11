@@ -3,9 +3,9 @@
 namespace BGC_DataAccess.Interfaces;
 public interface IRpgCampaignService
 {
-    bool Delete(int id);
-    IEnumerable<RpgCampaign> GetAll();
-    RpgCampaign GetById(int id);
-    void Insert(RpgCampaign RpgCampaign);
-    bool Update(int id, RpgCampaign RpgCampaign);
+    Task<bool> Delete(int id); 
+    Task<IEnumerable<RpgCampaign>> GetAll(); 
+    Task<RpgCampaign> GetById(int id); 
+    Task<bool> Insert(RpgCampaign RpgCampaign); 
+    Task<bool> Update(int id, RpgCampaign RpgCampaign);
 }

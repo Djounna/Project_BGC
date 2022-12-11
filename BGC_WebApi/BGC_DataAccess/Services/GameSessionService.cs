@@ -1,5 +1,6 @@
 ﻿using BGC_DataAccess.Entities;
 using BGC_DataAccess.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,25 +12,25 @@ public class GameSessionService : BaseService, IGameSessionService
 {
     public GameSessionService(BGCContext context) : base(context) { }
 
-    public GameSession GetById(int id)
+    public async Task<GameSession> GetById(int id)
     {
-        return BgcContext.GameSessions.Find(id);
+        return await BgcContext.GameSessions.FindAsync(id);
     }
 
-    public IEnumerable<GameSession> GetAll()
+    public async Task<IEnumerable<GameSession>> GetAll()
     {
-        return BgcContext.GameSessions.ToList();
+        return await  BgcContext.GameSessions.ToListAsync();
     }
 
-    public void Insert(GameSession gameSession)
+    public async Task<bool> Insert(GameSession gameSession)
     {
         BgcContext.GameSessions.Add(gameSession);
-        BgcContext.SaveChanges();
+        return await BgcContext.SaveChangesAsync() >=1;
     }
 
-    public bool Update(int id, GameSession gameSession)
+    public async Task<bool> Update(int id, GameSession gameSession)
     {
-        GameSession toUpdate = BgcContext.GameSessions.Find(id);
+        GameSession toUpdate = await BgcContext.GameSessions.FindAsync(id);
 
         if (toUpdate != null)
         {
@@ -38,20 +39,18 @@ public class GameSessionService : BaseService, IGameSessionService
             toUpdate.MaxNumberPlayers = gameSession.MaxNumberPlayers;
             toUpdate.MinNumberPlayers = gameSession.MinNumberPlayers;
 
-            BgcContext.SaveChanges();
-            return true;
+            return await BgcContext.SaveChangesAsync() >=1;
         }
         return false;
     }
 
-    public bool Delete(int id)
+    public async Task<bool> Delete(int id)
     {
-        GameSession toDelete = BgcContext.GameSessions.Find(id);
+        GameSession toDelete = await BgcContext.GameSessions.FindAsync(id);
         if (toDelete != null)
         {
-            BgcContext.GameSessions.Remove(toDelete);
-            BgcContext.SaveChanges();
-            return true;
+           BgcContext.GameSessions.Remove(toDelete);
+           return await BgcContext.SaveChangesAsync() >=1;
         }
         return false;
     }

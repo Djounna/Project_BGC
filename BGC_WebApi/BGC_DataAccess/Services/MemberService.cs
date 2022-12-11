@@ -12,25 +12,25 @@ public class MemberService : BaseService, IMemberService
 {
     public MemberService(BGCContext context) : base(context) { }
 
-    public Member GetById(int id)
+    public async Task<Member> GetById(int id)
     {
-        return BgcContext.Members.Find(id);
+        return await BgcContext.Members.FindAsync(id);
     }
 
-    public IEnumerable<Member> GetAll()
+    public async Task<IEnumerable<Member>> GetAll()
     {
-        return BgcContext.Members.ToList();
+        return await BgcContext.Members.ToListAsync();
     }
 
-    public void Insert(Member member)
+    public async Task<bool> Insert(Member member)
     {
         BgcContext.Members.Add(member);
-        BgcContext.SaveChanges();
+        return await BgcContext.SaveChangesAsync() >=1;
     }
 
-    public bool Update(int id, Member member)
+    public async Task<bool> Update(int id, Member member)
     {
-        Member toUpdate = BgcContext.Members.Find(id);
+        Member toUpdate = await BgcContext.Members.FindAsync(id);
 
         if (toUpdate != null)
         {
@@ -40,20 +40,18 @@ public class MemberService : BaseService, IMemberService
             //memberToUpdate.Password = member.Password;
 
             //BgcContext.Members.Update(member); // Not necessary
-            BgcContext.SaveChanges();
-            return true;
+            return await BgcContext.SaveChangesAsync() >=1;
         }
         return false;
     }
 
-    public bool Delete(int id)
+    public async Task<bool> Delete(int id)
     {
-        Member toDelete = BgcContext.Members.Find(id);
+        Member toDelete = await BgcContext.Members.FindAsync(id);
         if (toDelete != null)
         {
             BgcContext.Members.Remove(toDelete);
-            BgcContext.SaveChanges();
-            return true;
+            return await BgcContext.SaveChangesAsync() >=1;
         }
         return false;
     }

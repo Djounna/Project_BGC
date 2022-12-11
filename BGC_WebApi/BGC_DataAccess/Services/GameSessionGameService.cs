@@ -1,5 +1,6 @@
 ﻿using BGC_DataAccess.Entities;
 using BGC_DataAccess.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,45 +12,43 @@ public class GameSessionGameService : BaseService, IGameSessionGameService
 {
     public GameSessionGameService(BGCContext context) : base(context) { }
 
-    public GameSessionGame GetById(int id)
+    public async Task<GameSessionGame> GetById(int id)
     {
-        return BgcContext.GameSessionGames.Find(id);
+        return await BgcContext.GameSessionGames.FindAsync(id);
     }
 
-    public IEnumerable<GameSessionGame> GetAll()
+    public async Task<IEnumerable<GameSessionGame>> GetAll()
     {
-        return BgcContext.GameSessionGames.ToList();
+        return await BgcContext.GameSessionGames.ToListAsync();
     }
 
-    public void Insert(GameSessionGame GameSessionGame)
+    public async Task<bool> Insert(GameSessionGame GameSessionGame)
     {
         BgcContext.GameSessionGames.Add(GameSessionGame);
-        BgcContext.SaveChanges();
+        return await BgcContext.SaveChangesAsync() >=1;
     }
 
-    public bool Update(int id, GameSessionGame GameSessionGame)
+    public async Task<bool> Update(int id, GameSessionGame GameSessionGame)
     {
-        GameSessionGame toUpdate = BgcContext.GameSessionGames.Find(id);
+        GameSessionGame toUpdate = await BgcContext.GameSessionGames.FindAsync(id);
 
         if (toUpdate != null)
         {
             // TO DO
-
-
-            BgcContext.SaveChanges();
-            return true;
+            return await BgcContext.SaveChangesAsync() >=1;
+            
         }
         return false;
     }
 
-    public bool Delete(int id)
+    public async Task<bool> Delete(int id)
     {
-        GameSessionGame toDelete = BgcContext.GameSessionGames.Find(id);
+        GameSessionGame toDelete = await BgcContext.GameSessionGames.FindAsync(id);
         if (toDelete != null)
         {
             BgcContext.GameSessionGames.Remove(toDelete);
-            BgcContext.SaveChanges();
-            return true;
+            return await BgcContext.SaveChangesAsync() >=1;
+           ;
         }
         return false;
     }

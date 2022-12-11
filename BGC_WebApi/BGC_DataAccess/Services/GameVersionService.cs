@@ -1,5 +1,6 @@
 ﻿using BGC_DataAccess.Entities;
 using BGC_DataAccess.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,44 +13,41 @@ public class GameVersionService : BaseService, IGameVersionService
     public GameVersionService(BGCContext context) : base(context) { }
 
 
-    public GameVersion GetById(int id)
+    public async Task<GameVersion> GetById(int id)
     {
-        return BgcContext.GameVersions.Find(id);
+        return await BgcContext.GameVersions.FindAsync(id);
     }
 
-    public IEnumerable<GameVersion> GetAll()
+    public async Task<IEnumerable<GameVersion>> GetAll()
     {
-        return BgcContext.GameVersions.ToList();
+        return await BgcContext.GameVersions.ToListAsync();
     }
 
-    public void Insert(GameVersion gameVersion)
+    public async Task<bool> Insert(GameVersion gameVersion)
     {
         BgcContext.GameVersions.Add(gameVersion);
-        BgcContext.SaveChanges();
+        return await BgcContext.SaveChangesAsync() >=1;
     }
 
-    public bool Update(int id, GameVersion gameVersion)
+    public async Task<bool> Update(int id, GameVersion gameVersion)
     {
-        GameVersion toUpdate = BgcContext.GameVersions.Find(id);
+        GameVersion toUpdate = await BgcContext.GameVersions.FindAsync(id);
 
         if (toUpdate != null)
         {
             //TO DO
-
-            BgcContext.SaveChanges();
-            return true;
+            return await BgcContext.SaveChangesAsync() >=1;
         }
         return false;
     }
 
-    public bool Delete(int id)
+    public async Task<bool> Delete(int id)
     {
-        GameVersion toDelete = BgcContext.GameVersions.Find(id);
+        GameVersion toDelete = await BgcContext.GameVersions.FindAsync(id);
         if (toDelete != null)
         {
             BgcContext.GameVersions.Remove(toDelete);
-            BgcContext.SaveChanges();
-            return true;
+            return await BgcContext.SaveChangesAsync() >= 1;
         }
         return false;
     }

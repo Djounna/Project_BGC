@@ -1,5 +1,6 @@
-﻿using BGC_DataAccess.Entities;
+﻿async using BGC_DataAccess.Entities;
 using BGC_DataAccess.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,45 +13,41 @@ public class GameTableService : BaseService, IGameTableService
     public GameTableService(BGCContext context) : base(context) { }
 
 
-    public GameTable GetById(int id)
+    public async Task<GameTable> GetById(int id)
     {
         return BgcContext.GameTables.Find(id);
     }
 
-    public IEnumerable<GameTable> GetAll()
+    public async Task<IEnumerable<GameTable>> GetAll()
     {
-        return BgcContext.GameTables.ToList();
+        return await BgcContext.GameTables.ToListAsync();
     }
 
-    public void Insert(GameTable gameTable)
+    public async Task<bool> Insert(GameTable gameTable)
     {
         BgcContext.GameTables.Add(gameTable);
-        BgcContext.SaveChanges();
+        return await BgcContext.SaveChangesAsync() >=1;
     }
 
-    public bool Update(int id, GameTable gameTable)
+    public async Task<bool> Update(int id, GameTable gameTable)
     {
-        GameTable toUpdate = BgcContext.GameTables.Find(id);
+        GameTable toUpdate = await BgcContext.GameTables.FindAsync(id);
 
         if (toUpdate != null)
         {
             // TO DO
-
-
-            BgcContext.SaveChanges();
-            return true;
+            return await BgcContext.SaveChangesAsync() >=1;
         }
         return false;
     }
 
-    public bool Delete(int id)
+    public async Task<bool> Delete(int id)
     {
-        GameTable toDelete = BgcContext.GameTables.Find(id);
+        GameTable toDelete = await BgcContext.GameTables.FindAsync(id);
         if (toDelete != null)
         {
             BgcContext.GameTables.Remove(toDelete);
-            BgcContext.SaveChanges();
-            return true;
+            return await BgcContext.SaveChangesAsync() >=1;
         }
         return false;
     }

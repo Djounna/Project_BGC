@@ -11,45 +11,41 @@ public class RpgCampaignRegistrationService : BaseService, IRpgCampaignRegistrat
 {
     public RpgCampaignRegistrationService(BGCContext context) : base(context) { }
 
-    public RpgCampaignRegistration GetById(int id)
+    public async Task<RpgCampaignRegistration> GetById(int id)
     {
-        return BgcContext.RpgCampaignRegistrations.Find(id);
+        return await BgcContext.RpgCampaignRegistrations.FindAsync(id);
     }
 
-    public IEnumerable<RpgCampaignRegistration> GetAll()
+    public async Task<IEnumerable<RpgCampaignRegistration>> GetAll()
     {
-        return BgcContext.RpgCampaignRegistrations.ToList();
+        return await BgcContext.RpgCampaignRegistrations.ToLisAsync();
     }
 
-    public void Insert(RpgCampaignRegistration RpgCampaignRegistration)
+    public async Task<bool> Insert(RpgCampaignRegistration RpgCampaignRegistration)
     {
         BgcContext.RpgCampaignRegistrations.Add(RpgCampaignRegistration);
-        BgcContext.SaveChanges();
+        return await BgcContext.SaveChangesAsync() >=1;
     }
 
-    public bool Update(int id, RpgCampaignRegistration RpgCampaignRegistration)
+    public async Task<bool> Update(int id, RpgCampaignRegistration RpgCampaignRegistration)
     {
-        RpgCampaignRegistration toUpdate = BgcContext.RpgCampaignRegistrations.Find(id);
+        RpgCampaignRegistration toUpdate = await BgcContext.RpgCampaignRegistrations.FindAsync(id);
 
         if (toUpdate != null)
         {
             // TO DO
-
-
-            BgcContext.SaveChanges();
-            return true;
+            return await BgcContext.SaveChangesAsync() >=1;
         }
         return false;
     }
 
-    public bool Delete(int id)
+    public async Task<bool> Delete(int id)
     {
-        RpgCampaignRegistration toDelete = BgcContext.RpgCampaignRegistrations.Find(id);
+        RpgCampaignRegistration toDelete = await BgcContext.RpgCampaignRegistrations.FindAsync(id);
         if (toDelete != null)
         {
             BgcContext.RpgCampaignRegistrations.Remove(toDelete);
-            BgcContext.SaveChanges();
-            return true;
+            return await BgcContext.SaveChangesAsync() >=1;
         }
         return false;
     }

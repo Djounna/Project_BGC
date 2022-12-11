@@ -3,9 +3,9 @@
 namespace BGC_DataAccess.Interfaces;
 public interface IGameSessionGameService
 {
-    bool Delete(int id);
-    IEnumerable<GameSessionGame> GetAll();
-    GameSessionGame GetById(int id);
-    void Insert(GameSessionGame GameSessionGame);
-    bool Update(int id, GameSessionGame GameSessionGame);
+    Task<bool> Delete(int id);
+    Task<IEnumerable<GameSessionGame>> GetAll();
+    Task<GameSessionGame> GetById(int id);
+    Task<bool> Insert(GameSessionGame GameSessionGame);
+    Task<bool> Update(int id, GameSessionGame GameSessionGame);
 }
