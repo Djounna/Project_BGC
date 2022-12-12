@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BGC_DataAccess.Entities;
+using BGC_DataAccess.Interfaces;
 using BGC_DataAccess.Services;
 using BGC_WebApi.DTOs;
 using Microsoft.AspNetCore.Mvc;
@@ -8,45 +9,43 @@ namespace BGC_WebApi.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class GameTableController : ControllerBase
-{
-    private IMapper mapper;
-    private GameTableService gameTableService;
+public class GameTableController : BaseController
+{   
+    private IGameTableService gameTableService;
 
-    public GameTableController(GameTableService GameTableService, IMapper mapper)
+    public GameTableController(IGameTableService GameTableService, IMapper mapper) : base(mapper)
     {
         this.gameTableService = GameTableService;
-        this.mapper = mapper;
     }
 
     /// <summary>
-    /// Get ALl GameTables
+    /// Get All GameTables
     /// </summary>
     [HttpGet]
 
-    public IActionResult GetAll()
+    public async Task<IActionResult> GetAll()
     {
-        return Ok(mapper.Map<IEnumerable<GameTableDTO>>(gameTableService.GetAll()));
+        return Ok(mapper.Map<IEnumerable<GameTableDTO>>(await gameTableService.GetAll()));
     }
 
     /// <summary>
     /// Get GameTable By Id
     /// </summary>
-    [HttpGet("Id")]
-
-    public IActionResult GetById(int id)
+    [HttpGet]
+    [Route("{id}")]
+    public async Task<IActionResult> GetById(int id)
     {
 
-        return Ok(mapper.Map<GameTableDTO>(gameTableService.GetById(id)));
+        return Ok(mapper.Map<GameTableDTO>(await gameTableService.GetById(id)));
     }
 
     /// <summary>
     /// Create a new GameTable
     /// </summary>
     [HttpPost]
-    public IActionResult Post([FromBody] GameTableDTO GameTableDTO)
+    public async Task<IActionResult> Post([FromBody] GameTableDTO GameTableDTO)
     {
-        gameTableService.Insert(mapper.Map<GameTable>(GameTableDTO));
+        await gameTableService.Insert(mapper.Map<GameTable>(GameTableDTO));
         return Ok();
     }
 
@@ -55,17 +54,18 @@ public class GameTableController : ControllerBase
     ///  Update a GameTable
     /// </summary>
     [HttpPut]
-    public IActionResult Put(int id, [FromBody] GameTableDTO GameTableDTO)
+    public async Task<IActionResult> Put(int id, [FromBody] GameTableDTO GameTableDTO)
     {
-        gameTableService.Update(id, mapper.Map<GameTable>(GameTableDTO));
+        await gameTableService.Update(id, mapper.Map<GameTable>(GameTableDTO));
         return Ok();
     }
 
     /// <summary>
     /// Delete a GameTable
     /// </summary>
+    [HttpDelete]
     public void Delete(int id)
     {
-        // A GameTable cannot be deleted if versions of the Game are linked
+        //To Do
     }
 }

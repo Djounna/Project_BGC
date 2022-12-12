@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BGC_DataAccess.Entities;
+using BGC_DataAccess.Interfaces;
 using BGC_DataAccess.Services;
 using BGC_WebApi.DTOs;
 using Microsoft.AspNetCore.Authorization;
@@ -10,18 +11,15 @@ namespace BGC_WebApi.Controllers;
 /// <summary>
 /// Controller for Games
 /// </summary>
-[Authorize]
 [Route("api/[controller]")]
 [ApiController]
-public class GameController : ControllerBase
-{
-    private IMapper mapper;
-    private GameService gameService;
+public class GameController : BaseController
+{  
+    private IGameService gameService;
 
-    public GameController(GameService gameService, IMapper mapper)
+    public GameController(IGameService gameService, IMapper mapper) : base(mapper)
     {
         this.gameService = gameService;
-        this.mapper = mapper;
     }
 
     /// <summary>
@@ -29,45 +27,46 @@ public class GameController : ControllerBase
     /// </summary>
     [HttpGet]
 
-    public IActionResult GetAll()
+    public async Task<IActionResult> GetAll()
     {
-        return Ok(mapper.Map<IEnumerable<GameDTO>>(gameService.GetAll()));
+        return Ok(mapper.Map<IEnumerable<GameDTO>>(await gameService.GetAll()));
     }
 
     /// <summary>
     /// Get Game By Id
     /// </summary>
-    [HttpGet("Id")]
+    [HttpGet]
+    [Route("{id}")]
 
-    public IActionResult GetById(int id){
-
-        return Ok(mapper.Map<GameDTO>(gameService.GetById(id)));
+    public async Task<IActionResult> GetById(int id)
+    {
+        return Ok(mapper.Map<GameDTO>(await gameService.GetById(id)));
     }
 
     /// <summary>
     /// Create a new Game
     /// </summary>
     [HttpPost]
-    public IActionResult Post([FromBody] GameDTO gameDTO)
+    public async Task<IActionResult> Post([FromBody] GameDTO gameDTO)
     {
-        gameService.Insert(mapper.Map<Game>(gameDTO));
+        await gameService.Insert(mapper.Map<Game>(gameDTO));
         return Ok();
     }
-
 
     /// <summary>
     ///  Update a Game
     /// </summary>
     [HttpPut]
-    public IActionResult Put(int id, [FromBody] GameDTO gameDTO)
+    public async Task<IActionResult> Put(int id, [FromBody] GameDTO gameDTO)
     {
-        gameService.Update(id, mapper.Map<Game>(gameDTO));
+        await gameService.Update(id, mapper.Map<Game>(gameDTO));
         return Ok();
     }
 
     /// <summary>
     /// Delete a Game
     /// </summary>
+    [HttpDelete]
     public void Delete(int id)
     {
         // A Game cannot be deleted if versions of the Game are linked

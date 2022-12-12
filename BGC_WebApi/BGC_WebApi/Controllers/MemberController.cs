@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BGC_DataAccess.Entities;
+using BGC_DataAccess.Interfaces;
 using BGC_DataAccess.Services;
 using BGC_WebApi.DTOs;
 using Microsoft.AspNetCore.Authorization;
@@ -14,15 +15,13 @@ namespace BGC_WebApi.Controllers;
 [Authorize]
 [Route("api/[controller]")]
 [ApiController]
-public class MemberController : ControllerBase
+public class MemberController : BaseController
 {
-    private IMapper mapper;
-    private MemberService MemberService;
+    private IMemberService memberService;
 
-    public MemberController(MemberService MemberService, IMapper mapper)
+    public MemberController(IMemberService memberService, IMapper mapper) : base(mapper)
     {
-        this.MemberService = MemberService;
-        this.mapper = mapper;
+        this.memberService = memberService;  
     }
 
     /// <summary>
@@ -30,29 +29,28 @@ public class MemberController : ControllerBase
     /// </summary>
     [HttpGet]
 
-    public IActionResult GetAll()
+    public async Task<IActionResult> GetAll()
     {
-        return Ok(mapper.Map<IEnumerable<MemberDTO>>(MemberService.GetAll()));
+        return Ok(mapper.Map<IEnumerable<MemberDTO>>(await memberService.GetAll()));
     }
 
     /// <summary>
     /// Get Member By Id
     /// </summary>
-    [HttpGet("Id")]
-
-    public IActionResult GetById(int id)
+    [HttpGet]
+    [Route("{id}")]
+    public async Task<IActionResult> GetById(int id)
     {
-
-        return Ok(mapper.Map<MemberDTO>(MemberService.GetById(id)));
+        return Ok(mapper.Map<MemberDTO>(await memberService.GetById(id)));
     }
 
     /// <summary>
     /// Create a new Member
     /// </summary>
     [HttpPost]
-    public IActionResult Post([FromBody] MemberDTO MemberDTO)
+    public async Task<IActionResult> Post([FromBody] MemberDTO MemberDTO)
     {
-        MemberService.Insert(mapper.Map<Member>(MemberDTO));
+        await memberService.Insert(mapper.Map<Member>(MemberDTO));
         return Ok();
     }
 
@@ -61,17 +59,18 @@ public class MemberController : ControllerBase
     ///  Update a Member
     /// </summary>
     [HttpPut]
-    public IActionResult Put(int id, [FromBody] MemberDTO MemberDTO)
+    public async Task<IActionResult> Put(int id, [FromBody] MemberDTO MemberDTO)
     {
-        MemberService.Update(id, mapper.Map<Member>(MemberDTO));
+        await memberService.Update(id, mapper.Map<Member>(MemberDTO));
         return Ok();
     }
 
     /// <summary>
     /// Delete a Member
     /// </summary>
+    [HttpDelete]
     public void Delete(int id)
     {
-        // A Member cannot be deleted if versions of the Member are linked
+        // 
     }
 }

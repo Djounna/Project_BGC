@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BGC_DataAccess.Entities;
+using BGC_DataAccess.Interfaces;
 using BGC_DataAccess.Services;
 using BGC_WebApi.DTOs;
 using Microsoft.AspNetCore.Authorization;
@@ -15,45 +16,41 @@ namespace BGC_WebApi.Controllers;
 [Authorize]
 [Route("api/[controller]")]
 [ApiController]
-public class GameVersionController : ControllerBase
+public class GameVersionController : BaseController
 {
-    private IMapper mapper;
-    private GameVersionService gameVersionService;
+    private IGameVersionService gameVersionService;
 
-    public GameVersionController(GameVersionService GameVersionService, IMapper mapper)
+    public GameVersionController(IGameVersionService gameVersionService, IMapper mapper) : base(mapper)
     {
-        this.gameVersionService = GameVersionService;
-        this.mapper = mapper;
+        this.gameVersionService = gameVersionService;
     }
 
     /// <summary>
-    /// Get ALl GameVersions
+    /// Get All GameVersions
     /// </summary>
     [HttpGet]
-
-    public IActionResult GetAll()
+    public async Task<IActionResult> GetAll()
     {
-        return Ok(mapper.Map<IEnumerable<GameVersionDTO>>(gameVersionService.GetAll()));
+        return Ok(mapper.Map<IEnumerable<GameVersionDTO>>(await gameVersionService.GetAll()));
     }
 
-    /// <summary>
+    /// <summary> 
     /// Get GameVersion By Id
     /// </summary>
-    [HttpGet("Id")]
-
-    public IActionResult GetById(int id)
+    [HttpGet]
+    [Route("{id}")]
+    public async Task<IActionResult> GetById(int id)
     {
-
-        return Ok(mapper.Map<GameVersionDTO>(gameVersionService.GetById(id)));
+        return Ok(mapper.Map<GameVersionDTO>(await gameVersionService.GetById(id)));
     }
 
     /// <summary>
     /// Create a new GameVersion
     /// </summary>
     [HttpPost]
-    public IActionResult Post([FromBody] GameVersionDTO GameVersionDTO)
+    public async Task<IActionResult> Post([FromBody] GameVersionDTO GameVersionDTO)
     {
-        gameVersionService.Insert(mapper.Map<GameVersion>(GameVersionDTO));
+        await gameVersionService.Insert(mapper.Map<GameVersion>(GameVersionDTO));
         return Ok();
     }
 
@@ -62,17 +59,18 @@ public class GameVersionController : ControllerBase
     ///  Update a GameVersion
     /// </summary>
     [HttpPut]
-    public IActionResult Put(int id, [FromBody] GameVersionDTO GameVersionDTO)
+    public async Task<IActionResult> Put(int id, [FromBody] GameVersionDTO GameVersionDTO)
     {
-        gameVersionService.Update(id, mapper.Map<GameVersion>(GameVersionDTO));
+        await gameVersionService.Update(id, mapper.Map<GameVersion>(GameVersionDTO));
         return Ok();
     }
 
     /// <summary>
     /// Delete a GameVersion
     /// </summary>
+    [HttpDelete]
     public void Delete(int id)
     {
-        // A GameVersion cannot be deleted if versions of the GameVersion are linked
+        // TO DO
     }
 }
