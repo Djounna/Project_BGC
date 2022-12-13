@@ -3,7 +3,11 @@ using BGC_DataAccess;
 using BGC_DataAccess.Interfaces;
 using BGC_DataAccess.Services;
 using BGC_WebApi.Configuration;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,6 +52,49 @@ builder.Services.AddScoped<IGameTableService,GameTableService>();
 // AutoMapper
 builder.Services.AddAutoMapper(typeof(APIMappingProfile), typeof(BLLMappingProfile));
 
+builder.Services.AddControllers()
+// Non obligatoire, pour être certain que les JSON renvoyés sont en camelCase
+.AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+})
+;
+
+string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+      builder => builder
+      .WithOrigins("http://localhost:4200")
+      .AllowAnyHeader()
+      .AllowAnyMethod());
+});
+
+string domain = $"https://{builder.Configuration["Auth0:Domain"]}/";
+
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.Authority = domain;
+        options.Audience = builder.Configuration["Auth0:Audience"];
+        options.TokenValidationParameters =
+                  new TokenValidationParameters { NameClaimType = ClaimTypes.NameIdentifier };
+    });
+
+builder.Services
+    .AddAuthorization(opt =>
+    {
+        opt.AddPolicy("client", policy => policy.RequireClaim("permissions", "client"));
+        opt.AddPolicy("admin", policy => policy.RequireClaim("permissions", "admin"));
+    }
+    );
+
+
+
+
+
+
 
 var app = builder.Build();
 
@@ -58,12 +105,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();
