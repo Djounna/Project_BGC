@@ -1,0 +1,18 @@
+<h3>Login</h3>
+<div *ngIf="(getIsAuth() | async) === false">
+    <button class="btn btn-primary" (click)="login()">Clic here to login with Auth0</button> 
+</div>
+<div *ngIf="getUser() | async as user">
+    <div>UserName : {{ user.name }}</div>
+    <div>E-mail : {{ user.email }}</div>
+</div>
+<br>   
+<div *ngIf="(getIsAuth() | async) === true">
+    <button class="btn btn-danger" (click)="logout()">Clic here for logout from Auth0</button>
+</div>
+<div *ngIf="(getIsAuth() | async) === true" class="mt-2">
+    <button class="btn btn-primary m-2" (click)="callPrivate('')">Call private</button>
+    <button class="btn btn-primary m-2" (click)="callPrivate('admin')">Call private admin</button>
+    <button class="btn btn-primary m-2" (click)="callPrivate('client')">Call private client</button>
+    <div>{{ response }}</div>
+</div>
