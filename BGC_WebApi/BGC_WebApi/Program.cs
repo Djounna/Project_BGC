@@ -85,8 +85,14 @@ builder.Services
 builder.Services
     .AddAuthorization(opt =>
     {
-        opt.AddPolicy("client", policy => policy.RequireClaim("permissions", "client"));
-        opt.AddPolicy("admin", policy => policy.RequireClaim("permissions", "admin"));
+        opt.AddPolicy("read:games", policy => policy.RequireClaim("permissions", "read:games"));
+        opt.AddPolicy("write:games", policy => policy.RequireClaim("permissions", "write:games"));
+        opt.AddPolicy("read:members", policy => policy.RequireClaim("permissions", "read:members"));
+        opt.AddPolicy("write:members", policy => policy.RequireClaim("permissions", "write:members"));
+        opt.AddPolicy("read:tables", policy => policy.RequireClaim("permissions", "read:tables"));
+        opt.AddPolicy("write:tables", policy => policy.RequireClaim("permissions", "write:tables"));
+        opt.AddPolicy("read:gameSessions", policy => policy.RequireClaim("permissions", "read:gameSessions"));
+        opt.AddPolicy("write:gameSessions", policy => policy.RequireClaim("permissions", "write:gameSessions"));
     }
     );
 
