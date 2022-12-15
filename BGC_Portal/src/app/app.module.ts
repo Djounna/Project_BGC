@@ -16,7 +16,8 @@ import { LoginComponent } from './login/login/login.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AuthModule
+    AuthModule,
+    ApiModule.forRoot({ rootUrl:'https://localhost:5000'})
   ],
   providers: [],
   bootstrap: [AppComponent]
