@@ -12,14 +12,13 @@ public class GameDTO
     /// </summary>
     public int GameId { get; set; }
     /// <summary>
-    /// game name
+    /// Game name
     /// </summary>
     public string Name { get; set; }
     /// <summary>
     /// Game description
     /// </summary>
     public string? Description { get; set; }
-
     /// <summary>
     /// Minimum number of players
     /// </summary>

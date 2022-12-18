@@ -21,7 +21,7 @@ constructor(private authSrv : AuthService, private http : HttpClient) {}
     this.authSrv.getAccessTokenSilently().subscribe({
       next : (token) => {
         this.http.get<String>(
-          'http://localhost:5000/api/values/private' + scope,
+          'http://localhost:7139/api/values/private' + scope,
           { headers: new HttpHeaders({ "Authorization": "Bearer " + token }) }
         ).subscribe({
           next : (r) => this.response = JSON.stringify(r),

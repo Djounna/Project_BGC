@@ -34,7 +34,7 @@ public class GameSessionDTO
     public int? MaxNumberPlayers { get; set; }
 
     /// <summary>
-    /// Session Status
+    /// Session status
     /// </summary>
     public SessionStatus Status { get; set; }
     
