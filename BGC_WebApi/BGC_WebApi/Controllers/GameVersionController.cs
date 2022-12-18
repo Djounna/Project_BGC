@@ -11,7 +11,7 @@ namespace BGC_WebApi.Controllers;
 
 
 /// <summary>
-/// Controller for GameVersions
+/// Controller for game versions
 /// </summary>
 [Authorize]
 [Route("api/[controller]")]

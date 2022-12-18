@@ -1,6 +1,5 @@
 {
 "$schema": "node_modules/ng-openapi-gen/ng-openapi-gen-schema.json",
-  "input": "https://localhost:7139",
-  "output": "src/app/api",
+  "input": "BCG_WebApi_swagger.json",
   "ignoreUnusedModels": false
 }

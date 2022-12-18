@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BGC_WebApi.Controllers;
+
+/// <summary>
+/// Controller for RPG campaigns
+/// </summary>
 [Route("api/[controller]")]
 [ApiController]
 public class RpgCampaignController : BaseController
@@ -19,7 +23,7 @@ public class RpgCampaignController : BaseController
     }
 
     /// <summary>
-    /// Get All RpgCampaigns
+    /// Get All Rpg campaigns
     /// </summary>
     [HttpGet]
 

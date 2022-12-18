@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BGC_WebApi.Controllers;
 
+/// <summary>
+/// Controller for game tables
+/// </summary>
 [Route("api/[controller]")]
 [ApiController]
 public class GameTableController : BaseController
