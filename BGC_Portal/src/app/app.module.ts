@@ -6,15 +6,33 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthModule } from '@auth0/auth0-angular';
 import { ApiModule } from './api/api.module';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { FooterComponent } from './shared/footer/footer.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { SidenavComponent } from './shared/sidenav/sidenav.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule} from '@angular/material/icon';
+import { MatDividerModule} from '@angular/material/divider';
+import { MatToolbarModule } from '@angular/material/toolbar'; 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent,
+    FooterComponent,
+    SidenavComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatDividerModule,
+    MatIconModule,
+    MatSidenavModule,
     HttpClientModule,
     ApiModule.forRoot({ rootUrl: 'https://localhost:7139' }),
     AuthModule.forRoot({

@@ -1,0 +1,31 @@
+  <mat-toolbar>
+  <div class="button-row">
+    <button mat-raised-button color="primary" [matMenuTriggerFor]="aboveMenu">Acceuil</button>
+      <mat-menu #aboveMenu="matMenu" yPosition="below">
+      </mat-menu>
+  </div>
+
+  <div class="button-row">
+    <button mat-raised-button color="accent" [matMenuTriggerFor]="calendarMenu">Calendrier</button>
+      <mat-menu #calendarMenu="matMenu" yPosition="below">
+        <button mat-menu-item>Jeux de société</button>
+        <button mat-menu-item>Jeux de rôle</button>
+      </mat-menu>
+  </div>
+
+  <div class="button-row">
+    <button mat-raised-button color="accent" [matMenuTriggerFor]="CatalogMenu">Catalogue</button>
+      <mat-menu #CatalogMenu="matMenu" yPosition="below">
+        <button mat-menu-item>Jeux de société</button>
+        <button mat-menu-item>Jeux de rôle</button>
+    </mat-menu>
+  </div>
+
+  <div class="button-row">
+    <button mat-raised-button color="primary" [matMenuTriggerFor]="MemberMenu">Mes parties</button>
+      <mat-menu #MemberMenu="matMenu" yPosition="below">
+        <button mat-menu-item>Archives</button>
+        <button mat-menu-item>A venir</button>
+      </mat-menu>
+</div>
+</mat-toolbar>

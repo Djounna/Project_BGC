@@ -1,0 +1,10 @@
+section {
+  display: table;
+}
+
+.button-row {
+  display: table-cell;
+  max-width: 600px;
+  margin: 8px 8px 8px 0;
+  padding: 8px 8px 8px 8px;
+}
