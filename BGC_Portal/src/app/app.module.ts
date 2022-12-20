@@ -14,14 +14,22 @@ import { SidenavComponent } from './shared/sidenav/sidenav.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule} from '@angular/material/icon';
 import { MatDividerModule} from '@angular/material/divider';
-import { MatToolbarModule } from '@angular/material/toolbar'; 
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { HomepageComponent } from './homepage/homepage.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { CatalogComponent } from './catalog/catalog.component';
+import { CalendarComponent } from './calendar/calendar.component'; 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     FooterComponent,
-    SidenavComponent
+    SidenavComponent,
+    HomepageComponent,
+    NotFoundComponent,
+    CatalogComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,

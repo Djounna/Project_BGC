@@ -1,14 +1,13 @@
   <mat-toolbar>
+  <div>
   <div class="button-row">
-    <button mat-raised-button color="primary" [matMenuTriggerFor]="aboveMenu">Acceuil</button>
-      <mat-menu #aboveMenu="matMenu" yPosition="below">
-      </mat-menu>
+    <button mat-raised-button color="primary" (click)="GoToHome()" >Acceuil</button>
   </div>
 
   <div class="button-row">
     <button mat-raised-button color="accent" [matMenuTriggerFor]="calendarMenu">Calendrier</button>
       <mat-menu #calendarMenu="matMenu" yPosition="below">
-        <button mat-menu-item>Jeux de société</button>
+        <button mat-menu-item (click)="GoToCalendar()">Jeux de société</button>
         <button mat-menu-item>Jeux de rôle</button>
       </mat-menu>
   </div>
@@ -16,7 +15,7 @@
   <div class="button-row">
     <button mat-raised-button color="accent" [matMenuTriggerFor]="CatalogMenu">Catalogue</button>
       <mat-menu #CatalogMenu="matMenu" yPosition="below">
-        <button mat-menu-item>Jeux de société</button>
+        <button mat-menu-item (click)="GoToCatalog()">Jeux de société</button>
         <button mat-menu-item>Jeux de rôle</button>
     </mat-menu>
   </div>
@@ -27,5 +26,18 @@
         <button mat-menu-item>Archives</button>
         <button mat-menu-item>A venir</button>
       </mat-menu>
+  </div>
 </div>
+
+<div class="toobar_login">
+  <div class="button-row">
+    <button mat-raised-button color="accent" (click)="Login()">Login</button>
+  </div>
+
+  <div class="button-row">
+    <button mat-raised-button color="primary" (click)="MyAccount()">Mon compte</button>
+  </div>
+</div>
+
+
 </mat-toolbar>
