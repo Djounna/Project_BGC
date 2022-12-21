@@ -1,6 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject} from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { Router } from '@angular/router';
+import { AuthService } from '@auth0/auth0-angular';
+import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-navbar',
@@ -9,19 +13,36 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private authSrv : AuthService, 
+    private router: Router,
+    public dialog: MatDialog ) { }
 
 ngOnInit(): void {
   }
   
 Login(): void {
-  this.router.navigate(['login']);
+    this.authSrv.loginWithRedirect();
+  }
 
+OpenDialogLogout(): void {
+    const dialogRef = this.dialog.open(NavbarDialog);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+
+Logout(): void{
+    this.authSrv.logout();
 }
+getIsAuth() {
+  return this.authSrv.isAuthenticated$;
+}
+
 MyAccount(): void{
   this.router.navigate([]);
 }
-
 GoToHome(): void{
   this.router.navigate(['home']);
 }
@@ -32,3 +53,24 @@ GoToCalendar(): void {
   this.router.navigate(['calendar']);
 }
 }
+
+@Component({
+  selector: 'navbar-dialog',
+  templateUrl: '../dialog/navbar-dialog.html',
+})
+export class NavbarDialog {
+  constructor(
+    public dialogRef: MatDialogRef<NavbarDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+}
+
+export interface DialogData {
+  animal: string;
+  name: string;
+}
+

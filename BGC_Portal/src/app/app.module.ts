@@ -18,11 +18,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { HomepageComponent } from './homepage/homepage.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { CatalogComponent } from './catalog/catalog.component';
-import { CalendarComponent } from './calendar/calendar.component'; 
+import { CalendarComponent } from './calendar/calendar.component';
+import { LoginComponent } from './login/login/login.component'; 
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatFormFieldModule} from '@angular/material/form-field'; 
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
     NavbarComponent,
     FooterComponent,
     SidenavComponent,
@@ -35,10 +39,12 @@ import { CalendarComponent } from './calendar/calendar.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatFormFieldModule,
     MatMenuModule,
     MatButtonModule,
     MatToolbarModule,
     MatDividerModule,
+    MatDialogModule,
     MatIconModule,
     MatSidenavModule,
     HttpClientModule,

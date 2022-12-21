@@ -31,13 +31,16 @@
 
 <div class="toobar_login">
   <div class="button-row">
-    <button mat-raised-button color="accent" (click)="Login()">Login</button>
+    <button mat-raised-button color="accent" *ngIf="(getIsAuth() | async) === false" (click)="Login()">Login</button>
   </div>
 
+  <div class="button-row">
+    <button mat-raised-button color="accent" *ngIf="(getIsAuth() | async) === true" (click)="OpenDialogLogout()">Logout</button>
+  </div>
+  
   <div class="button-row">
     <button mat-raised-button color="primary" (click)="MyAccount()">Mon compte</button>
   </div>
 </div>
-
 
 </mat-toolbar>
