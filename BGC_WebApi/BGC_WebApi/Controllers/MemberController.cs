@@ -29,7 +29,7 @@ public class MemberController : BaseController
     /// </summary>
     [HttpGet]
 
-    public async Task<IActionResult> GetAll()
+    public async Task<ActionResult<IEnumerable<MemberDTO>>> GetAll()
     {
         return Ok(mapper.Map<IEnumerable<MemberDTO>>(await memberService.GetAll()));
     }
@@ -39,7 +39,7 @@ public class MemberController : BaseController
     /// </summary>
     [HttpGet]
     [Route("{id}")]
-    public async Task<IActionResult> GetById(int id)
+    public async Task<ActionResult<MemberDTO>> GetById(int id)
     {
         return Ok(mapper.Map<MemberDTO>(await memberService.GetById(id)));
     }
@@ -48,7 +48,7 @@ public class MemberController : BaseController
     /// Create a new Member
     /// </summary>
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] MemberDTO MemberDTO)
+    public async Task<ActionResult> Post([FromBody] MemberDTO MemberDTO)
     {
         await memberService.Insert(mapper.Map<Member>(MemberDTO));
         return Ok();
@@ -59,7 +59,7 @@ public class MemberController : BaseController
     ///  Update a Member
     /// </summary>
     [HttpPut]
-    public async Task<IActionResult> Put(int id, [FromBody] MemberDTO MemberDTO)
+    public async Task<ActionResult> Put(int id, [FromBody] MemberDTO MemberDTO)
     {
         await memberService.Update(id, mapper.Map<Member>(MemberDTO));
         return Ok();

@@ -14,6 +14,8 @@ export { MemberDto } from './models/member-dto';
 export { RpgCampaign } from './models/rpg-campaign';
 export { RpgCampaignDto } from './models/rpg-campaign-dto';
 export { RpgCampaignRegistration } from './models/rpg-campaign-registration';
+export { RpgCampaignRegistrationDto } from './models/rpg-campaign-registration-dto';
 export { RpgSession } from './models/rpg-session';
+export { RpgSessionDto } from './models/rpg-session-dto';
 export { RpgSessionGame } from './models/rpg-session-game';
 export { SessionStatus } from './models/session-status';

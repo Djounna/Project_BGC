@@ -29,7 +29,7 @@ public class GameVersionController : BaseController
     /// Get All GameVersions
     /// </summary>
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<ActionResult<IEnumerable<GameVersionDTO>>> GetAll()
     {
         return Ok(mapper.Map<IEnumerable<GameVersionDTO>>(await gameVersionService.GetAll()));
     }
@@ -40,7 +40,7 @@ public class GameVersionController : BaseController
     /// <param name="id">Id</param>
     [HttpGet]
     [Route("{id}")]
-    public async Task<IActionResult> GetById(int id)
+    public async Task<ActionResult<GameVersionDTO>> GetById(int id)
     {
         return Ok(mapper.Map<GameVersionDTO>(await gameVersionService.GetById(id)));
     }
@@ -50,7 +50,7 @@ public class GameVersionController : BaseController
     /// </summary>
     /// <param name="GameVersionDTO">Dto</param>
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] GameVersionDTO GameVersionDTO)
+    public async Task<ActionResult> Post([FromBody] GameVersionDTO GameVersionDTO)
     {
         await gameVersionService.Insert(mapper.Map<GameVersion>(GameVersionDTO));
         return Ok();
@@ -63,7 +63,7 @@ public class GameVersionController : BaseController
     /// <param name="id">Id</param>
     /// <param name="GameVersionDTO">Dto</param>
     [HttpPut]
-    public async Task<IActionResult> Put(int id, [FromBody] GameVersionDTO GameVersionDTO)
+    public async Task<ActionResult> Put(int id, [FromBody] GameVersionDTO GameVersionDTO)
     {
         await gameVersionService.Update(id, mapper.Map<GameVersion>(GameVersionDTO));
         return Ok();

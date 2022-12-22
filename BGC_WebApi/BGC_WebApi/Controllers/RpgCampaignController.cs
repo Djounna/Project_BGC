@@ -27,7 +27,7 @@ public class RpgCampaignController : BaseController
     /// </summary>
     [HttpGet]
 
-    public async Task<IActionResult> GetAll()
+    public async Task<ActionResult<IEnumerable<RpgCampaignDTO>>> GetAll()
     {
         return Ok(mapper.Map<IEnumerable<RpgCampaignDTO>>(await rpgCampaignService.GetAll()));
     }
@@ -39,7 +39,7 @@ public class RpgCampaignController : BaseController
     [HttpGet]
     [Route("{id}")]
 
-    public async Task<IActionResult> GetById(int id)
+    public async Task<ActionResult<RpgCampaignDTO>> GetById(int id)
     {
         return Ok(mapper.Map<RpgCampaignDTO>(await rpgCampaignService.GetById(id)));
     }
@@ -49,7 +49,7 @@ public class RpgCampaignController : BaseController
     /// </summary>
     /// <param name="RpgCampaignDTO">Dto</param>
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] RpgCampaignDTO RpgCampaignDTO)
+    public async Task<ActionResult> Post([FromBody] RpgCampaignDTO RpgCampaignDTO)
     {
         await rpgCampaignService.Insert(mapper.Map<RpgCampaign>(RpgCampaignDTO));
         return Ok();
@@ -62,7 +62,7 @@ public class RpgCampaignController : BaseController
     /// <param name="id">Id</param>
     /// <param name="RpgCampaignDTO">Dto</param>
     [HttpPut]
-    public async Task<IActionResult> Put(int id, [FromBody] RpgCampaignDTO RpgCampaignDTO)
+    public async Task<ActionResult> Put(int id, [FromBody] RpgCampaignDTO RpgCampaignDTO)
     {
         await rpgCampaignService.Update(id, mapper.Map<RpgCampaign>(RpgCampaignDTO));
         return Ok();

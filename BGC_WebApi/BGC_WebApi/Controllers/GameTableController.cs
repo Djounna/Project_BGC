@@ -26,7 +26,7 @@ public class GameTableController : BaseController
     /// </summary>
     [HttpGet]
 
-    public async Task<IActionResult> GetAll()
+    public async Task<ActionResult<IEnumerable<GameTableDTO>>> GetAll()
     {
         return Ok(mapper.Map<IEnumerable<GameTableDTO>>(await gameTableService.GetAll()));
     }
@@ -37,7 +37,7 @@ public class GameTableController : BaseController
     /// <param name="id">Id</param>
     [HttpGet]
     [Route("{id}")]
-    public async Task<IActionResult> GetById(int id)
+    public async Task<ActionResult<GameTableDTO>> GetById(int id)
     {
 
         return Ok(mapper.Map<GameTableDTO>(await gameTableService.GetById(id)));
@@ -48,7 +48,7 @@ public class GameTableController : BaseController
     /// </summary>
     /// <param name="GameTableDTO">Dto</param>
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] GameTableDTO GameTableDTO)
+    public async Task<ActionResult> Post([FromBody] GameTableDTO GameTableDTO)
     {
         await gameTableService.Insert(mapper.Map<GameTable>(GameTableDTO));
         return Ok();
@@ -61,7 +61,7 @@ public class GameTableController : BaseController
     /// <param name="id">Id</param>
     /// <param name="GameTableDTO">Dto</param>
     [HttpPut]
-    public async Task<IActionResult> Put(int id, [FromBody] GameTableDTO GameTableDTO)
+    public async Task<ActionResult> Put(int id, [FromBody] GameTableDTO GameTableDTO)
     {
         await gameTableService.Update(id, mapper.Map<GameTable>(GameTableDTO));
         return Ok();

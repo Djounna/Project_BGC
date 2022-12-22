@@ -11,6 +11,8 @@ import { GameTableService } from './services/game-table.service';
 import { GameVersionService } from './services/game-version.service';
 import { MemberService } from './services/member.service';
 import { RpgCampaignService } from './services/rpg-campaign.service';
+import { RpgCampaignRegistrationService } from './services/rpg-campaign-registration.service';
+import { RpgSessionService } from './services/rpg-session.service';
 
 /**
  * Module that provides all services and configuration.
@@ -27,6 +29,8 @@ import { RpgCampaignService } from './services/rpg-campaign.service';
     GameVersionService,
     MemberService,
     RpgCampaignService,
+    RpgCampaignRegistrationService,
+    RpgSessionService,
     ApiConfiguration
   ],
 })

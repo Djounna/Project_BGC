@@ -25,7 +25,7 @@ public class GameSessionRegistrationController : BaseController
     /// Get ALl Games
     /// </summary>
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<ActionResult<IEnumerable<GameSessionRegistrationDTO>>> GetAll()
     {
         return Ok(mapper.Map<IEnumerable<GameSessionRegistrationDTO>>(await gameSessionRegistrationService.GetAll()));
     }
@@ -36,7 +36,7 @@ public class GameSessionRegistrationController : BaseController
     /// <param name="id">Id</param>
     [HttpGet]
     [Route("{id}")]
-    public async Task<IActionResult> GetById(int id)
+    public async Task<ActionResult<GameSessionRegistrationDTO>> GetById(int id)
     {
 
         return Ok(mapper.Map<GameSessionRegistrationDTO>(await gameSessionRegistrationService.GetById(id)));
@@ -47,7 +47,7 @@ public class GameSessionRegistrationController : BaseController
     /// </summary>
     /// <param name="gameSessionRegistrationDTO">Dto</param>
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] GameSessionRegistrationDTO gameSessionRegistrationDTO)
+    public async Task<ActionResult> Post([FromBody] GameSessionRegistrationDTO gameSessionRegistrationDTO)
     {
         await gameSessionRegistrationService.Insert(mapper.Map<GameSessionRegistration>(gameSessionRegistrationDTO));
         return Ok();
@@ -60,7 +60,7 @@ public class GameSessionRegistrationController : BaseController
     /// <param name="id">Id</param>
     /// <param name="gameSessionRegistrationDTO">Dto</param>
     [HttpPut]
-    public async Task<IActionResult> Put(int id, [FromBody] GameSessionRegistrationDTO gameSessionRegistrationDTO)
+    public async Task<ActionResult> Put(int id, [FromBody] GameSessionRegistrationDTO gameSessionRegistrationDTO)
     {
         await gameSessionRegistrationService.Update(id, mapper.Map<GameSessionRegistration>(gameSessionRegistrationDTO));
         return Ok();

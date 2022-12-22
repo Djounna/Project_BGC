@@ -29,14 +29,14 @@ export class MemberService extends BaseService {
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiMemberGet()` instead.
+   * To access only the response body, use `apiMemberGet$Plain()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiMemberGet$Response(params?: {
+  apiMemberGet$Plain$Response(params?: {
     context?: HttpContext
   }
-): Observable<StrictHttpResponse<void>> {
+): Observable<StrictHttpResponse<Array<MemberDto>>> {
 
     const rb = new RequestBuilder(this.rootUrl, MemberService.ApiMemberGetPath, 'get');
     if (params) {
@@ -44,29 +44,72 @@ export class MemberService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*',
+      accept: 'text/plain',
       context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        return r as StrictHttpResponse<Array<MemberDto>>;
       })
     );
   }
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `apiMemberGet$Response()` instead.
+   * To access the full response (for headers, for example), `apiMemberGet$Plain$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiMemberGet(params?: {
+  apiMemberGet$Plain(params?: {
     context?: HttpContext
   }
-): Observable<void> {
+): Observable<Array<MemberDto>> {
 
-    return this.apiMemberGet$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
+    return this.apiMemberGet$Plain$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<MemberDto>>) => r.body as Array<MemberDto>)
+    );
+  }
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiMemberGet$Json()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiMemberGet$Json$Response(params?: {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<MemberDto>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, MemberService.ApiMemberGetPath, 'get');
+    if (params) {
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'text/json',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<MemberDto>>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiMemberGet$Json$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiMemberGet$Json(params?: {
+    context?: HttpContext
+  }
+): Observable<Array<MemberDto>> {
+
+    return this.apiMemberGet$Json$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<MemberDto>>) => r.body as Array<MemberDto>)
     );
   }
 
@@ -233,15 +276,15 @@ export class MemberService extends BaseService {
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiMemberIdGet()` instead.
+   * To access only the response body, use `apiMemberIdGet$Plain()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiMemberIdGet$Response(params: {
+  apiMemberIdGet$Plain$Response(params: {
     id: number;
     context?: HttpContext
   }
-): Observable<StrictHttpResponse<void>> {
+): Observable<StrictHttpResponse<MemberDto>> {
 
     const rb = new RequestBuilder(this.rootUrl, MemberService.ApiMemberIdGetPath, 'get');
     if (params) {
@@ -250,30 +293,76 @@ export class MemberService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*',
+      accept: 'text/plain',
       context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        return r as StrictHttpResponse<MemberDto>;
       })
     );
   }
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `apiMemberIdGet$Response()` instead.
+   * To access the full response (for headers, for example), `apiMemberIdGet$Plain$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiMemberIdGet(params: {
+  apiMemberIdGet$Plain(params: {
     id: number;
     context?: HttpContext
   }
-): Observable<void> {
+): Observable<MemberDto> {
 
-    return this.apiMemberIdGet$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
+    return this.apiMemberIdGet$Plain$Response(params).pipe(
+      map((r: StrictHttpResponse<MemberDto>) => r.body as MemberDto)
+    );
+  }
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiMemberIdGet$Json()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiMemberIdGet$Json$Response(params: {
+    id: number;
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<MemberDto>> {
+
+    const rb = new RequestBuilder(this.rootUrl, MemberService.ApiMemberIdGetPath, 'get');
+    if (params) {
+      rb.path('id', params.id, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'text/json',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<MemberDto>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiMemberIdGet$Json$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiMemberIdGet$Json(params: {
+    id: number;
+    context?: HttpContext
+  }
+): Observable<MemberDto> {
+
+    return this.apiMemberIdGet$Json$Response(params).pipe(
+      map((r: StrictHttpResponse<MemberDto>) => r.body as MemberDto)
     );
   }
 

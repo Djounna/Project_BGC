@@ -5,3 +5,5 @@ export { GameTableService } from './services/game-table.service';
 export { GameVersionService } from './services/game-version.service';
 export { MemberService } from './services/member.service';
 export { RpgCampaignService } from './services/rpg-campaign.service';
+export { RpgCampaignRegistrationService } from './services/rpg-campaign-registration.service';
+export { RpgSessionService } from './services/rpg-session.service';

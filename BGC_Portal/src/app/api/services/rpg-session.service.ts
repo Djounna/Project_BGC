@@ -9,12 +9,12 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
-import { RpgCampaignDto } from '../models/rpg-campaign-dto';
+import { RpgSessionDto } from '../models/rpg-session-dto';
 
 @Injectable({
   providedIn: 'root',
 })
-export class RpgCampaignService extends BaseService {
+export class RpgSessionService extends BaseService {
   constructor(
     config: ApiConfiguration,
     http: HttpClient
@@ -23,22 +23,22 @@ export class RpgCampaignService extends BaseService {
   }
 
   /**
-   * Path part for operation apiRpgCampaignGet
+   * Path part for operation apiRpgSessionGet
    */
-  static readonly ApiRpgCampaignGetPath = '/api/RpgCampaign';
+  static readonly ApiRpgSessionGetPath = '/api/RpgSession';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiRpgCampaignGet$Plain()` instead.
+   * To access only the response body, use `apiRpgSessionGet$Plain()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiRpgCampaignGet$Plain$Response(params?: {
+  apiRpgSessionGet$Plain$Response(params?: {
     context?: HttpContext
   }
-): Observable<StrictHttpResponse<Array<RpgCampaignDto>>> {
+): Observable<StrictHttpResponse<Array<RpgSessionDto>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, RpgCampaignService.ApiRpgCampaignGetPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, RpgSessionService.ApiRpgSessionGetPath, 'get');
     if (params) {
     }
 
@@ -49,39 +49,39 @@ export class RpgCampaignService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<RpgCampaignDto>>;
+        return r as StrictHttpResponse<Array<RpgSessionDto>>;
       })
     );
   }
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `apiRpgCampaignGet$Plain$Response()` instead.
+   * To access the full response (for headers, for example), `apiRpgSessionGet$Plain$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiRpgCampaignGet$Plain(params?: {
+  apiRpgSessionGet$Plain(params?: {
     context?: HttpContext
   }
-): Observable<Array<RpgCampaignDto>> {
+): Observable<Array<RpgSessionDto>> {
 
-    return this.apiRpgCampaignGet$Plain$Response(params).pipe(
-      map((r: StrictHttpResponse<Array<RpgCampaignDto>>) => r.body as Array<RpgCampaignDto>)
+    return this.apiRpgSessionGet$Plain$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<RpgSessionDto>>) => r.body as Array<RpgSessionDto>)
     );
   }
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiRpgCampaignGet$Json()` instead.
+   * To access only the response body, use `apiRpgSessionGet$Json()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiRpgCampaignGet$Json$Response(params?: {
+  apiRpgSessionGet$Json$Response(params?: {
     context?: HttpContext
   }
-): Observable<StrictHttpResponse<Array<RpgCampaignDto>>> {
+): Observable<StrictHttpResponse<Array<RpgSessionDto>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, RpgCampaignService.ApiRpgCampaignGetPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, RpgSessionService.ApiRpgSessionGetPath, 'get');
     if (params) {
     }
 
@@ -92,46 +92,46 @@ export class RpgCampaignService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<RpgCampaignDto>>;
+        return r as StrictHttpResponse<Array<RpgSessionDto>>;
       })
     );
   }
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `apiRpgCampaignGet$Json$Response()` instead.
+   * To access the full response (for headers, for example), `apiRpgSessionGet$Json$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiRpgCampaignGet$Json(params?: {
+  apiRpgSessionGet$Json(params?: {
     context?: HttpContext
   }
-): Observable<Array<RpgCampaignDto>> {
+): Observable<Array<RpgSessionDto>> {
 
-    return this.apiRpgCampaignGet$Json$Response(params).pipe(
-      map((r: StrictHttpResponse<Array<RpgCampaignDto>>) => r.body as Array<RpgCampaignDto>)
+    return this.apiRpgSessionGet$Json$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<RpgSessionDto>>) => r.body as Array<RpgSessionDto>)
     );
   }
 
   /**
-   * Path part for operation apiRpgCampaignPut
+   * Path part for operation apiRpgSessionPut
    */
-  static readonly ApiRpgCampaignPutPath = '/api/RpgCampaign';
+  static readonly ApiRpgSessionPutPath = '/api/RpgSession';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiRpgCampaignPut()` instead.
+   * To access only the response body, use `apiRpgSessionPut()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiRpgCampaignPut$Response(params?: {
+  apiRpgSessionPut$Response(params?: {
     id?: number;
     context?: HttpContext
-    body?: RpgCampaignDto
+    body?: RpgSessionDto
   }
 ): Observable<StrictHttpResponse<void>> {
 
-    const rb = new RequestBuilder(this.rootUrl, RpgCampaignService.ApiRpgCampaignPutPath, 'put');
+    const rb = new RequestBuilder(this.rootUrl, RpgSessionService.ApiRpgSessionPutPath, 'put');
     if (params) {
       rb.query('id', params.id, {});
       rb.body(params.body, 'application/*+json');
@@ -151,40 +151,40 @@ export class RpgCampaignService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `apiRpgCampaignPut$Response()` instead.
+   * To access the full response (for headers, for example), `apiRpgSessionPut$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiRpgCampaignPut(params?: {
+  apiRpgSessionPut(params?: {
     id?: number;
     context?: HttpContext
-    body?: RpgCampaignDto
+    body?: RpgSessionDto
   }
 ): Observable<void> {
 
-    return this.apiRpgCampaignPut$Response(params).pipe(
+    return this.apiRpgSessionPut$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }
 
   /**
-   * Path part for operation apiRpgCampaignPost
+   * Path part for operation apiRpgSessionPost
    */
-  static readonly ApiRpgCampaignPostPath = '/api/RpgCampaign';
+  static readonly ApiRpgSessionPostPath = '/api/RpgSession';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiRpgCampaignPost()` instead.
+   * To access only the response body, use `apiRpgSessionPost()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiRpgCampaignPost$Response(params?: {
+  apiRpgSessionPost$Response(params?: {
     context?: HttpContext
-    body?: RpgCampaignDto
+    body?: RpgSessionDto
   }
 ): Observable<StrictHttpResponse<void>> {
 
-    const rb = new RequestBuilder(this.rootUrl, RpgCampaignService.ApiRpgCampaignPostPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, RpgSessionService.ApiRpgSessionPostPath, 'post');
     if (params) {
       rb.body(params.body, 'application/*+json');
     }
@@ -203,39 +203,39 @@ export class RpgCampaignService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `apiRpgCampaignPost$Response()` instead.
+   * To access the full response (for headers, for example), `apiRpgSessionPost$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiRpgCampaignPost(params?: {
+  apiRpgSessionPost(params?: {
     context?: HttpContext
-    body?: RpgCampaignDto
+    body?: RpgSessionDto
   }
 ): Observable<void> {
 
-    return this.apiRpgCampaignPost$Response(params).pipe(
+    return this.apiRpgSessionPost$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }
 
   /**
-   * Path part for operation apiRpgCampaignDelete
+   * Path part for operation apiRpgSessionDelete
    */
-  static readonly ApiRpgCampaignDeletePath = '/api/RpgCampaign';
+  static readonly ApiRpgSessionDeletePath = '/api/RpgSession';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiRpgCampaignDelete()` instead.
+   * To access only the response body, use `apiRpgSessionDelete()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiRpgCampaignDelete$Response(params?: {
+  apiRpgSessionDelete$Response(params?: {
     id?: number;
     context?: HttpContext
   }
 ): Observable<StrictHttpResponse<void>> {
 
-    const rb = new RequestBuilder(this.rootUrl, RpgCampaignService.ApiRpgCampaignDeletePath, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, RpgSessionService.ApiRpgSessionDeletePath, 'delete');
     if (params) {
       rb.query('id', params.id, {});
     }
@@ -254,39 +254,39 @@ export class RpgCampaignService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `apiRpgCampaignDelete$Response()` instead.
+   * To access the full response (for headers, for example), `apiRpgSessionDelete$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiRpgCampaignDelete(params?: {
+  apiRpgSessionDelete(params?: {
     id?: number;
     context?: HttpContext
   }
 ): Observable<void> {
 
-    return this.apiRpgCampaignDelete$Response(params).pipe(
+    return this.apiRpgSessionDelete$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }
 
   /**
-   * Path part for operation apiRpgCampaignIdGet
+   * Path part for operation apiRpgSessionIdGet
    */
-  static readonly ApiRpgCampaignIdGetPath = '/api/RpgCampaign/{id}';
+  static readonly ApiRpgSessionIdGetPath = '/api/RpgSession/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiRpgCampaignIdGet$Plain()` instead.
+   * To access only the response body, use `apiRpgSessionIdGet$Plain()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiRpgCampaignIdGet$Plain$Response(params: {
+  apiRpgSessionIdGet$Plain$Response(params: {
     id: number;
     context?: HttpContext
   }
-): Observable<StrictHttpResponse<RpgCampaignDto>> {
+): Observable<StrictHttpResponse<RpgSessionDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, RpgCampaignService.ApiRpgCampaignIdGetPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, RpgSessionService.ApiRpgSessionIdGetPath, 'get');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -298,41 +298,41 @@ export class RpgCampaignService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<RpgCampaignDto>;
+        return r as StrictHttpResponse<RpgSessionDto>;
       })
     );
   }
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `apiRpgCampaignIdGet$Plain$Response()` instead.
+   * To access the full response (for headers, for example), `apiRpgSessionIdGet$Plain$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiRpgCampaignIdGet$Plain(params: {
+  apiRpgSessionIdGet$Plain(params: {
     id: number;
     context?: HttpContext
   }
-): Observable<RpgCampaignDto> {
+): Observable<RpgSessionDto> {
 
-    return this.apiRpgCampaignIdGet$Plain$Response(params).pipe(
-      map((r: StrictHttpResponse<RpgCampaignDto>) => r.body as RpgCampaignDto)
+    return this.apiRpgSessionIdGet$Plain$Response(params).pipe(
+      map((r: StrictHttpResponse<RpgSessionDto>) => r.body as RpgSessionDto)
     );
   }
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiRpgCampaignIdGet$Json()` instead.
+   * To access only the response body, use `apiRpgSessionIdGet$Json()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiRpgCampaignIdGet$Json$Response(params: {
+  apiRpgSessionIdGet$Json$Response(params: {
     id: number;
     context?: HttpContext
   }
-): Observable<StrictHttpResponse<RpgCampaignDto>> {
+): Observable<StrictHttpResponse<RpgSessionDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, RpgCampaignService.ApiRpgCampaignIdGetPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, RpgSessionService.ApiRpgSessionIdGetPath, 'get');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -344,25 +344,25 @@ export class RpgCampaignService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<RpgCampaignDto>;
+        return r as StrictHttpResponse<RpgSessionDto>;
       })
     );
   }
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `apiRpgCampaignIdGet$Json$Response()` instead.
+   * To access the full response (for headers, for example), `apiRpgSessionIdGet$Json$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiRpgCampaignIdGet$Json(params: {
+  apiRpgSessionIdGet$Json(params: {
     id: number;
     context?: HttpContext
   }
-): Observable<RpgCampaignDto> {
+): Observable<RpgSessionDto> {
 
-    return this.apiRpgCampaignIdGet$Json$Response(params).pipe(
-      map((r: StrictHttpResponse<RpgCampaignDto>) => r.body as RpgCampaignDto)
+    return this.apiRpgSessionIdGet$Json$Response(params).pipe(
+      map((r: StrictHttpResponse<RpgSessionDto>) => r.body as RpgSessionDto)
     );
   }
 
