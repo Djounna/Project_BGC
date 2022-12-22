@@ -25,7 +25,7 @@ public class MemberController : BaseController
     }
 
     /// <summary>
-    /// Get ALl Members
+    /// Get All Members
     /// </summary>
     [HttpGet]
 

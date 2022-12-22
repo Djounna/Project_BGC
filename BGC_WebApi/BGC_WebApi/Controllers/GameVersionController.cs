@@ -37,6 +37,7 @@ public class GameVersionController : BaseController
     /// <summary> 
     /// Get GameVersion By Id
     /// </summary>
+    /// <param name="id">Id</param>
     [HttpGet]
     [Route("{id}")]
     public async Task<IActionResult> GetById(int id)
@@ -47,6 +48,7 @@ public class GameVersionController : BaseController
     /// <summary>
     /// Create a new GameVersion
     /// </summary>
+    /// <param name="GameVersionDTO">Dto</param>
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] GameVersionDTO GameVersionDTO)
     {
@@ -58,6 +60,8 @@ public class GameVersionController : BaseController
     /// <summary>
     ///  Update a GameVersion
     /// </summary>
+    /// <param name="id">Id</param>
+    /// <param name="GameVersionDTO">Dto</param>
     [HttpPut]
     public async Task<IActionResult> Put(int id, [FromBody] GameVersionDTO GameVersionDTO)
     {
@@ -68,6 +72,7 @@ public class GameVersionController : BaseController
     /// <summary>
     /// Delete a GameVersion
     /// </summary>
+    /// <param name="id">Id</param>
     [HttpDelete]
     public void Delete(int id)
     {

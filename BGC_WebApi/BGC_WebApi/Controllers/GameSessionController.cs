@@ -30,6 +30,7 @@ public class GameSessionController : BaseController
     /// <summary>
     /// Get GameSession By Id
     /// </summary>
+    /// <param name="id">Id</param>
     [HttpGet]
     [Route("{id}")]
 
@@ -42,6 +43,7 @@ public class GameSessionController : BaseController
     /// <summary>
     /// Create a new GameSession
     /// </summary>
+    /// <param name="GameSessionDTO">Dto</param>
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] GameSessionDTO GameSessionDTO)
     {
@@ -53,6 +55,8 @@ public class GameSessionController : BaseController
     /// <summary>
     ///  Update a GameSession
     /// </summary>
+    /// <param name="id">Id</param>
+    /// <param name="GameSessionDTO">Dto</param>
     [HttpPut]
     public async Task<IActionResult> Put(int id, [FromBody] GameSessionDTO GameSessionDTO)
     {
@@ -63,6 +67,7 @@ public class GameSessionController : BaseController
     /// <summary>
     /// Delete a GameSession
     /// </summary>
+    /// <param name="id">Id</param>
     [HttpDelete]
     public void Delete(int id)
     {

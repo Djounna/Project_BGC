@@ -29,14 +29,14 @@ export class GameService extends BaseService {
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiGameGet()` instead.
+   * To access only the response body, use `apiGameGet$Plain()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiGameGet$Response(params?: {
+  apiGameGet$Plain$Response(params?: {
     context?: HttpContext
   }
-): Observable<StrictHttpResponse<void>> {
+): Observable<StrictHttpResponse<Array<GameDto>>> {
 
     const rb = new RequestBuilder(this.rootUrl, GameService.ApiGameGetPath, 'get');
     if (params) {
@@ -44,29 +44,72 @@ export class GameService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*',
+      accept: 'text/plain',
       context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        return r as StrictHttpResponse<Array<GameDto>>;
       })
     );
   }
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `apiGameGet$Response()` instead.
+   * To access the full response (for headers, for example), `apiGameGet$Plain$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiGameGet(params?: {
+  apiGameGet$Plain(params?: {
     context?: HttpContext
   }
-): Observable<void> {
+): Observable<Array<GameDto>> {
 
-    return this.apiGameGet$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
+    return this.apiGameGet$Plain$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<GameDto>>) => r.body as Array<GameDto>)
+    );
+  }
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiGameGet$Json()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiGameGet$Json$Response(params?: {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<GameDto>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, GameService.ApiGameGetPath, 'get');
+    if (params) {
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'text/json',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<GameDto>>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiGameGet$Json$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiGameGet$Json(params?: {
+    context?: HttpContext
+  }
+): Observable<Array<GameDto>> {
+
+    return this.apiGameGet$Json$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<GameDto>>) => r.body as Array<GameDto>)
     );
   }
 
@@ -233,15 +276,15 @@ export class GameService extends BaseService {
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiGameIdGet()` instead.
+   * To access only the response body, use `apiGameIdGet$Plain()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiGameIdGet$Response(params: {
+  apiGameIdGet$Plain$Response(params: {
     id: number;
     context?: HttpContext
   }
-): Observable<StrictHttpResponse<void>> {
+): Observable<StrictHttpResponse<GameDto>> {
 
     const rb = new RequestBuilder(this.rootUrl, GameService.ApiGameIdGetPath, 'get');
     if (params) {
@@ -250,30 +293,76 @@ export class GameService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*',
+      accept: 'text/plain',
       context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        return r as StrictHttpResponse<GameDto>;
       })
     );
   }
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `apiGameIdGet$Response()` instead.
+   * To access the full response (for headers, for example), `apiGameIdGet$Plain$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiGameIdGet(params: {
+  apiGameIdGet$Plain(params: {
     id: number;
     context?: HttpContext
   }
-): Observable<void> {
+): Observable<GameDto> {
 
-    return this.apiGameIdGet$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
+    return this.apiGameIdGet$Plain$Response(params).pipe(
+      map((r: StrictHttpResponse<GameDto>) => r.body as GameDto)
+    );
+  }
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiGameIdGet$Json()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiGameIdGet$Json$Response(params: {
+    id: number;
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<GameDto>> {
+
+    const rb = new RequestBuilder(this.rootUrl, GameService.ApiGameIdGetPath, 'get');
+    if (params) {
+      rb.path('id', params.id, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'text/json',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<GameDto>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiGameIdGet$Json$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiGameIdGet$Json(params: {
+    id: number;
+    context?: HttpContext
+  }
+): Observable<GameDto> {
+
+    return this.apiGameIdGet$Json$Response(params).pipe(
+      map((r: StrictHttpResponse<GameDto>) => r.body as GameDto)
     );
   }
 

@@ -1,1 +1,8 @@
 <p>catalog works!</p>
+<div *ngFor="let game of games; let i = index" >
+    <p>{{game.name}}</p>
+
+<app-game-card [Game]="game"></app-game-card>
+
+
+</div>

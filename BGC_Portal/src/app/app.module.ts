@@ -21,7 +21,9 @@ import { CatalogComponent } from './catalog/catalog.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { LoginComponent } from './login/login/login.component'; 
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatFormFieldModule} from '@angular/material/form-field'; 
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatCardModule} from '@angular/material/card'; 
+import { GameCardComponent } from './catalog/game-card/game-card.component'; 
 
 @NgModule({
   declarations: [
@@ -33,13 +35,15 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     HomepageComponent,
     NotFoundComponent,
     CatalogComponent,
-    CalendarComponent
+    CalendarComponent,
+    GameCardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
+    MatCardModule,
     MatMenuModule,
     MatButtonModule,
     MatToolbarModule,

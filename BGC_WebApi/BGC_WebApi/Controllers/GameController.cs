@@ -5,6 +5,7 @@ using BGC_DataAccess.Services;
 using BGC_WebApi.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace BGC_WebApi.Controllers;
 
@@ -23,11 +24,10 @@ public class GameController : BaseController
     }
 
     /// <summary>
-    /// Get ALl Games
+    /// Get All Games
     /// </summary>
     [HttpGet]
-
-    public async Task<IActionResult> GetAll()
+    public async Task<ActionResult<IEnumerable<GameDTO>>> GetAll()
     {
         return Ok(mapper.Map<IEnumerable<GameDTO>>(await gameService.GetAll()));
     }
@@ -35,10 +35,11 @@ public class GameController : BaseController
     /// <summary>
     /// Get Game By Id
     /// </summary>
+    /// <param name="id">Id</param>
     [HttpGet]
     [Route("{id}")]
 
-    public async Task<IActionResult> GetById(int id)
+    public async Task<ActionResult<GameDTO>> GetById(int id)
     {
         return Ok(mapper.Map<GameDTO>(await gameService.GetById(id)));
     }
@@ -46,8 +47,9 @@ public class GameController : BaseController
     /// <summary>
     /// Create a new Game
     /// </summary>
+    /// <param name="gameDTO">Dto</param>
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] GameDTO gameDTO)
+    public async Task<ActionResult> Post([FromBody] GameDTO gameDTO)
     {
         await gameService.Insert(mapper.Map<Game>(gameDTO));
         return Ok();
@@ -56,8 +58,10 @@ public class GameController : BaseController
     /// <summary>
     ///  Update a Game
     /// </summary>
+    /// <param name="id">Id</param>
+    /// <param name="gameDTO">Dto</param>
     [HttpPut]
-    public async Task<IActionResult> Put(int id, [FromBody] GameDTO gameDTO)
+    public async Task<ActionResult> Put(int id, [FromBody] GameDTO gameDTO)
     {
         await gameService.Update(id, mapper.Map<Game>(gameDTO));
         return Ok();
@@ -66,6 +70,7 @@ public class GameController : BaseController
     /// <summary>
     /// Delete a Game
     /// </summary>
+    /// <param name="id">Id</param>
     [HttpDelete]
     public void Delete(int id)
     {

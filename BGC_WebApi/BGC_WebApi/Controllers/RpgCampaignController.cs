@@ -35,6 +35,7 @@ public class RpgCampaignController : BaseController
     /// <summary>
     /// Get RpgCampaign By Id
     /// </summary>
+    /// <param name="id">Id</param>
     [HttpGet]
     [Route("{id}")]
 
@@ -46,6 +47,7 @@ public class RpgCampaignController : BaseController
     /// <summary>
     /// Create a new RpgCampaign
     /// </summary>
+    /// <param name="RpgCampaignDTO">Dto</param>
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] RpgCampaignDTO RpgCampaignDTO)
     {
@@ -57,6 +59,8 @@ public class RpgCampaignController : BaseController
     /// <summary>
     ///  Update a RpgCampaign
     /// </summary>
+    /// <param name="id">Id</param>
+    /// <param name="RpgCampaignDTO">Dto</param>
     [HttpPut]
     public async Task<IActionResult> Put(int id, [FromBody] RpgCampaignDTO RpgCampaignDTO)
     {
@@ -67,6 +71,7 @@ public class RpgCampaignController : BaseController
     /// <summary>
     /// Delete a RpgCampaign
     /// </summary>
+    /// <param name="id">Id</param>
     [HttpDelete]
     public void Delete(int id)
     {

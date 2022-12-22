@@ -34,6 +34,7 @@ public class GameTableController : BaseController
     /// <summary>
     /// Get GameTable By Id
     /// </summary>
+    /// <param name="id">Id</param>
     [HttpGet]
     [Route("{id}")]
     public async Task<IActionResult> GetById(int id)
@@ -45,6 +46,7 @@ public class GameTableController : BaseController
     /// <summary>
     /// Create a new GameTable
     /// </summary>
+    /// <param name="GameTableDTO">Dto</param>
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] GameTableDTO GameTableDTO)
     {
@@ -56,6 +58,8 @@ public class GameTableController : BaseController
     /// <summary>
     ///  Update a GameTable
     /// </summary>
+    /// <param name="id">Id</param>
+    /// <param name="GameTableDTO">Dto</param>
     [HttpPut]
     public async Task<IActionResult> Put(int id, [FromBody] GameTableDTO GameTableDTO)
     {
@@ -66,6 +70,7 @@ public class GameTableController : BaseController
     /// <summary>
     /// Delete a GameTable
     /// </summary>
+    /// <param name="id">Id</param>
     [HttpDelete]
     public void Delete(int id)
     {
