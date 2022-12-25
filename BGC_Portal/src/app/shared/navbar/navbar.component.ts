@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { MatDialog } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { MemberDto } from 'src/app/api/models';
+import { MemberService } from 'src/app/api/services';
+import { HttpContext} from '@angular/common/http';
 
 
 @Component({
@@ -13,15 +16,25 @@ import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 })
 export class NavbarComponent implements OnInit {
 
+
   constructor(private authSrv : AuthService, 
     private router: Router,
+    private memberService : MemberService,
     public dialog: MatDialog ) { }
 
 ngOnInit(): void {
   }
   
-Login(): void {
+  Login() {
     this.authSrv.loginWithRedirect();
+  }
+
+  checkAndCreateUser(): void{
+    var member: MemberDto = {};
+    member.memberId = 0;
+    member.name = 'test';
+    member.email = 'test';
+    this.memberService.apiMemberCheckUserExistPost({ body: member });
   }
 
 OpenDialogLogout(): void {
@@ -41,7 +54,7 @@ getIsAuth() {
 }
 
 MyAccount(): void{
-  this.router.navigate([]);
+    this.checkAndCreateUser();
 }
 GoToHome(): void{
   this.router.navigate(['home']);

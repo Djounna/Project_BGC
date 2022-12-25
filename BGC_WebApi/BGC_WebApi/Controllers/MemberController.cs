@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BGC_BusinessLogic.Services;
 using BGC_DataAccess.Entities;
 using BGC_DataAccess.Interfaces;
 using BGC_DataAccess.Services;
@@ -12,16 +13,16 @@ namespace BGC_WebApi.Controllers;
 /// <summary>
 /// Controller for Members
 /// </summary>
-[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class MemberController : BaseController
 {
     private IMemberService memberService;
+    private MemberBLL memberBLL;
 
-    public MemberController(IMemberService memberService, IMapper mapper) : base(mapper)
+    public MemberController(IMemberService memberService, MemberBLL memberBll, IMapper mapper) : base(mapper)
     {
-        this.memberService = memberService;  
+        this.memberService = memberService;
     }
 
     /// <summary>
@@ -73,4 +74,17 @@ public class MemberController : BaseController
     {
         // 
     }
+
+    /// <summary>
+    /// Checks if user exists if DB and creates it if necessary
+    /// </summary>
+    /// <param name="memberDTO">Member DTO</param>
+    [HttpPost]
+    [Route("CheckUserExist")]
+    public async Task<ActionResult> CheckUserExists([FromBody]MemberDTO memberDTO)
+    {
+        await memberBLL.CheckAndCreateUser(mapper.Map<Member>(memberDTO));
+        return Ok();
+    }
+
 }

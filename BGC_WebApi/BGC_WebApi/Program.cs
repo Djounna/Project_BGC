@@ -1,4 +1,5 @@
 using BGC_BusinessLogic.Configuration;
+using BGC_BusinessLogic.Services;
 using BGC_DataAccess;
 using BGC_DataAccess.Interfaces;
 using BGC_DataAccess.Services;
@@ -36,18 +37,18 @@ builder.Services.AddScoped<IRpgSessionGameService,RpgSessionGameService> ();
 builder.Services.AddScoped<IRpgSessionService,RpgSessionService>();
 builder.Services.AddScoped<IGameTableService,GameTableService>();
 
-//  Services : Business
-//builder.Services.AddScoped<IMemberBLL, MemberBLL>();
-//builder.Services.AddScoped<IGameBLL, GameBLL>();
-//builder.Services.AddScoped<IGameSessionGameBLL, GameSessionGameBLL>();
-//builder.Services.AddScoped<IGameSessionBLL, GameSessionBLL>();
-//builder.Services.AddScoped<IGameSessionRegistrationBLL, GameSessionRegistrationBLL>();
-//builder.Services.AddScoped<IGameVersionBLL, GameVersionBLL>();
-//builder.Services.AddScoped<IRpgCampaignRegistrationBLL, RpgCampaignRegistrationBLL>();
-//builder.Services.AddScoped<IRpgCampaignBLL, RpgCampaignBLL>();
-//builder.Services.AddScoped<IRpgSessionGameBLL, RpgSessionGameBLL>();
-//builder.Services.AddScoped<IRpgSessionBLL, RpgSessionBLL>();
-//builder.Services.AddScoped<IGameTableBLL, GameTableBLL>();
+//Services : Business
+builder.Services.AddScoped<MemberBLL>();
+//builder.Services.AddScoped<GameBLL>();
+//builder.Services.AddScoped<GameSessionGameBLL>();
+//builder.Services.AddScoped<GameSessionBLL>();
+//builder.Services.AddScoped<GameSessionRegistrationBLL>();
+//builder.Services.AddScoped<GameVersionBLL>();
+//builder.Services.AddScoped<RpgCampaignRegistrationBLL>();
+//builder.Services.AddScoped<RpgCampaignBLL>();
+//builder.Services.AddScoped<RpgSessionGameBLL>();
+//builder.Services.AddScoped<RpgSessionBLL>();
+//builder.Services.AddScoped<GameTableBLL>();
 
 // AutoMapper
 builder.Services.AddAutoMapper(typeof(APIMappingProfile), typeof(BLLMappingProfile));

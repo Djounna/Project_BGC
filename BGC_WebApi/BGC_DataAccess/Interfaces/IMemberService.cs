@@ -8,4 +8,5 @@ public interface IMemberService
     Task<bool> Insert(Member member);
     Task<bool> Update(int id, Member member);
     Task<bool> Delete(int id);
+    Task<bool> CheckUserExist(string email);
 }

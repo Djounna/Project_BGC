@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -56,5 +57,15 @@ public class MemberService : BaseService, IMemberService
         return false;
     }
 
+    public async Task<bool> CheckUserExist(string email)
+    {
+        Member member = await BgcContext.Members.FirstOrDefaultAsync(m => m.Email == email);
+
+        if ( member != null)
+        {
+            return true;
+        }
+        return false;
+    }
 
 }

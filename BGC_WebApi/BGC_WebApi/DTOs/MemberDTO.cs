@@ -19,14 +19,15 @@ public class MemberDTO
     /// Email address
     /// </summary>
     public string Email { get; set; }
-    /// <summary>
-    /// Password
-    /// </summary>
-    public string Password { get; set; }
-    /// <summary>
-    /// Role
-    /// </summary>
-    public string Role { get; set; }  // TO DO : to change when adding Role&Permission 
+
+    ///// <summary>
+    ///// Password
+    ///// </summary>
+    //public string Password { get; set; }
+    ///// <summary>
+    ///// Role
+    ///// </summary>
+    //public string Role { get; set; }  
 
     //public ICollection<RpgCampaign> RpgCampaigns { get; set; }
     //public ICollection<GameSession> GameSessions { get; set; }

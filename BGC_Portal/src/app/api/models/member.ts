@@ -10,8 +10,6 @@ export interface Member {
   gameSessions?: null | Array<GameSession>;
   memberId?: number;
   name?: null | string;
-  password?: null | string;
-  role?: null | string;
   rpgCampaignRegistrations?: null | Array<RpgCampaignRegistration>;
   rpgCampaigns?: null | Array<RpgCampaign>;
 }

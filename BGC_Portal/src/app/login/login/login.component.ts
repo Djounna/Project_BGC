@@ -3,8 +3,10 @@ import { CommonModule } from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpContext, HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { MemberService } from 'src/app/api/services';
+import { MemberDto } from 'src/app/api/models';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +16,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class LoginComponent implements OnInit {
   response = "";
 
-  constructor(private authSrv : AuthService, private http : HttpClient) {}
+  constructor(private authSrv : AuthService, private memberService: MemberService, private http : HttpClient) {}
 
   ngOnInit(): void {
   }
@@ -47,6 +49,14 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.authSrv.loginWithRedirect();
+    this.checkAndCreateUser();
+  }
+
+  checkAndCreateUser(): void{
+    var member!: MemberDto;
+    member.name = 'test';
+    member.email = 'test';
+    this.memberService.apiMemberCheckUserExistPost({ body: member });
   }
 
   logout() {
