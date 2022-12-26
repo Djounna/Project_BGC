@@ -367,23 +367,23 @@ export class MemberService extends BaseService {
   }
 
   /**
-   * Path part for operation apiMemberCheckUserExistPost
+   * Path part for operation apiMemberCheckUserExistsPost
    */
-  static readonly ApiMemberCheckUserExistPostPath = '/api/Member/CheckUserExist';
+  static readonly ApiMemberCheckUserExistsPostPath = '/api/Member/CheckUserExists';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiMemberCheckUserExistPost()` instead.
+   * To access only the response body, use `apiMemberCheckUserExistsPost()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiMemberCheckUserExistPost$Response(params?: {
+  apiMemberCheckUserExistsPost$Response(params?: {
     context?: HttpContext
     body?: MemberDto
   }
 ): Observable<StrictHttpResponse<void>> {
 
-    const rb = new RequestBuilder(this.rootUrl, MemberService.ApiMemberCheckUserExistPostPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, MemberService.ApiMemberCheckUserExistsPostPath, 'post');
     if (params) {
       rb.body(params.body, 'application/*+json');
     }
@@ -402,17 +402,17 @@ export class MemberService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `apiMemberCheckUserExistPost$Response()` instead.
+   * To access the full response (for headers, for example), `apiMemberCheckUserExistsPost$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiMemberCheckUserExistPost(params?: {
+  apiMemberCheckUserExistsPost(params?: {
     context?: HttpContext
     body?: MemberDto
   }
 ): Observable<void> {
 
-    return this.apiMemberCheckUserExistPost$Response(params).pipe(
+    return this.apiMemberCheckUserExistsPost$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }

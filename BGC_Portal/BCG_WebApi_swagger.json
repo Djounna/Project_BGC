@@ -1001,7 +1001,7 @@
         }
       }
     },
-    "/api/Member/CheckUserExist": {
+    "/api/Member/CheckUserExists": {
       "post": {
         "tags": [
           "Member"

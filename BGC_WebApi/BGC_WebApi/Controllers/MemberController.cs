@@ -23,6 +23,7 @@ public class MemberController : BaseController
     public MemberController(IMemberService memberService, MemberBLL memberBll, IMapper mapper) : base(mapper)
     {
         this.memberService = memberService;
+        this.memberBLL = memberBll;
     }
 
     /// <summary>
@@ -76,15 +77,18 @@ public class MemberController : BaseController
     }
 
     /// <summary>
-    /// Checks if user exists if DB and creates it if necessary
+    /// Checks if user exists in DB and creates it if necessary
     /// </summary>
     /// <param name="memberDTO">Member DTO</param>
     [HttpPost]
-    [Route("CheckUserExist")]
-    public async Task<ActionResult> CheckUserExists([FromBody]MemberDTO memberDTO)
+    [Route("CheckUserExists")]
+    public async Task<ActionResult<bool>> CheckUserExists([FromBody]MemberDTO memberDTO)
     {
-        await memberBLL.CheckAndCreateUser(mapper.Map<Member>(memberDTO));
-        return Ok();
+        if (await memberBLL.CheckAndCreateUser(mapper.Map<Member>(memberDTO)))
+        {
+            return Ok(true);
+        };
+        return Ok(false);
     }
 
 }

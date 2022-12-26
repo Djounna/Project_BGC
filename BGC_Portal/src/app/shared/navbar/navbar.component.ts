@@ -7,6 +7,7 @@ import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { MemberDto } from 'src/app/api/models';
 import { MemberService } from 'src/app/api/services';
 import { HttpContext} from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -15,7 +16,6 @@ import { HttpContext} from '@angular/common/http';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
 
   constructor(private authSrv : AuthService, 
     private router: Router,
@@ -27,14 +27,21 @@ ngOnInit(): void {
   
   Login() {
     this.authSrv.loginWithRedirect();
+    this.checkAndCreateUser();
   }
 
   checkAndCreateUser(): void{
     var member: MemberDto = {};
     member.memberId = 0;
-    member.name = 'test';
-    member.email = 'test';
-    this.memberService.apiMemberCheckUserExistPost({ body: member });
+    this.authSrv.user$.subscribe({
+      next : res =>{
+        member.name = res?.name;
+        member.email = res?.email;
+        this.memberService.apiMemberCheckUserExistsPost$Response({ body: member }).subscribe();
+    },
+    error: res => { console.log(res)}
+  });
+    
   }
 
 OpenDialogLogout(): void {

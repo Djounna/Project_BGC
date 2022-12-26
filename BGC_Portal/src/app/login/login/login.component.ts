@@ -56,7 +56,12 @@ export class LoginComponent implements OnInit {
     var member!: MemberDto;
     member.name = 'test';
     member.email = 'test';
-    this.memberService.apiMemberCheckUserExistPost({ body: member });
+    this.memberService.apiMemberCheckUserExistsPost({ body: member }).subscribe( () => {
+      next: ;
+      error: ;
+    }
+    
+    );
   }
 
   logout() {
