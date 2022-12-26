@@ -17,13 +17,15 @@ public class MemberBLL
         this.memberService = memberService;
     }
 
-    public async Task CheckAndCreateUser(Member member)
+    public async Task<bool> CheckAndCreateUser(Member member)
     {
        if (await memberService.CheckUserExist(member.Email) == false)
         {
           await memberService.Insert(member);
+            return true;
+
         }
-        return;
+        return false;
     }
 
 }

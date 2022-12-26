@@ -1,17 +1,16 @@
 <mat-card class="example-card">
   <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>{{Game.name}}</mat-card-title>
-    <mat-card-subtitle></mat-card-subtitle>
+    <mat-card-title-group>
+      <mat-card-title>{{Game.name}}</mat-card-title>
+      <mat-card-subtitle>{{Game.maxNumberPlayers}} à {{Game.minNumberPlayers}} joueurs</mat-card-subtitle>
+      <img mat-card-lg-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" >
+    </mat-card-title-group>
   </mat-card-header>
-  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
   <mat-card-content>
-    <p>
         {{Game.description}}
-    </p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>{{Game.maxNumberPlayers}}</button>
-    <button mat-button>{{Game.minNumberPlayers}}</button>
+    <button mat-stroked-button color="primary">Créer une partie</button>
+    <button mat-stroked-button color="accent">Trouver une partie</button>
   </mat-card-actions>
 </mat-card>
