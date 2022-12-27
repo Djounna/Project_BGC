@@ -23,7 +23,9 @@ import { LoginComponent } from './login/login/login.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card'; 
-import { GameCardComponent } from './catalog/game-card/game-card.component'; 
+import { GameCardComponent } from './catalog/game-card/game-card.component';
+import { AddGameComponent } from './catalog/add-game/add-game.component';
+import { GameSessionsComponent } from './game-sessions/game-sessions.component'; 
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { GameCardComponent } from './catalog/game-card/game-card.component';
     NotFoundComponent,
     CatalogComponent,
     CalendarComponent,
-    GameCardComponent
+    GameCardComponent,
+    AddGameComponent,
+    GameSessionsComponent
   ],
   imports: [
     BrowserModule,

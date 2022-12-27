@@ -87,7 +87,7 @@ public class MemberController : BaseController
         if (await memberBLL.CheckAndCreateUser(mapper.Map<Member>(memberDTO)))
         {
             return Ok(true);
-        };
+        }
         return Ok(false);
     }
 
