@@ -71,6 +71,9 @@ GoToCatalog(): void {
 }
 GoToCalendar(): void {
   this.router.navigate(['calendar']);
+} 
+GoToGameSessions(): void {
+  this.router.navigate(['game-sessions'])
 }
 }
 

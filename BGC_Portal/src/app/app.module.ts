@@ -25,7 +25,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card'; 
 import { GameCardComponent } from './catalog/game-card/game-card.component';
 import { AddGameComponent } from './catalog/add-game/add-game.component';
-import { GameSessionsComponent } from './game-sessions/game-sessions.component'; 
+import { GameSessionsComponent } from './game-sessions/game-sessions.component';
+import { AllSessionsComponent } from './game-sessions/all-sessions/all-sessions.component';
+import { MatTable, MatTableModule, MatTableDataSource} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import { GameSessionsComponent } from './game-sessions/game-sessions.component';
     CalendarComponent,
     GameCardComponent,
     AddGameComponent,
-    GameSessionsComponent
+    GameSessionsComponent,
+    AllSessionsComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +53,7 @@ import { GameSessionsComponent } from './game-sessions/game-sessions.component';
     MatCardModule,
     MatMenuModule,
     MatButtonModule,
+    MatTableModule,
     MatToolbarModule,
     MatDividerModule,
     MatDialogModule,

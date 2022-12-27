@@ -23,7 +23,7 @@
   <div class="button-row">
     <button mat-raised-button color="primary" [matMenuTriggerFor]="MemberMenu">Mes parties</button>
       <mat-menu #MemberMenu="matMenu" yPosition="below">
-        <button mat-menu-item>Archives</button>
+        <button mat-menu-item (click)="GoToGameSessions()">Archives</button>
         <button mat-menu-item>A venir</button>
       </mat-menu>
   </div>
