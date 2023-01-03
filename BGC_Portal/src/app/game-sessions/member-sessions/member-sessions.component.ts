@@ -28,6 +28,7 @@ export class MemberSessionsComponent implements OnInit {
   ngOnInit(): void {
     this.sub = this.authService.user$.subscribe({
       next: (res) => {
+        console.log(res);
         this.memberName = res?.name;
         if (this.memberName !== null) {
           this.subSessions = this.gameSessionService

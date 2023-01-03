@@ -19,6 +19,7 @@ public class GameSessionController : BaseController
 	public GameSessionController(IGameSessionService gameSessionService, GameSessionBLL gameSessionBLL, IMapper mapper) : base(mapper)
 	{
 		this.gameSessionService= gameSessionService;
+        this.gameSessionBLL= gameSessionBLL;
 	}
     /// <summary>
     /// Get All GameSessions
