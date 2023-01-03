@@ -26,7 +26,7 @@ public class RpgCampaignDTO
     /// <summary>
     /// Organizer
     /// </summary>
-    public Member Organizer { get; set; }
+    public MemberDTO Organizer { get; set; }
 
     //public ICollection<RpgSession> Sessions { get; set; }
     //public ICollection<RpgCampaignRegistration> RpgCampaignRegistrations { get; set; }

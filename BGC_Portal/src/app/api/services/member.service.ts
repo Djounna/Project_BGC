@@ -367,21 +367,215 @@ export class MemberService extends BaseService {
   }
 
   /**
+   * Path part for operation apiMemberEmailGet
+   */
+  static readonly ApiMemberEmailGetPath = '/api/Member/{email}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiMemberEmailGet$Plain()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiMemberEmailGet$Plain$Response(params: {
+    email: string;
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<MemberDto>> {
+
+    const rb = new RequestBuilder(this.rootUrl, MemberService.ApiMemberEmailGetPath, 'get');
+    if (params) {
+      rb.path('email', params.email, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'text',
+      accept: 'text/plain',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<MemberDto>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiMemberEmailGet$Plain$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiMemberEmailGet$Plain(params: {
+    email: string;
+    context?: HttpContext
+  }
+): Observable<MemberDto> {
+
+    return this.apiMemberEmailGet$Plain$Response(params).pipe(
+      map((r: StrictHttpResponse<MemberDto>) => r.body as MemberDto)
+    );
+  }
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiMemberEmailGet$Json()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiMemberEmailGet$Json$Response(params: {
+    email: string;
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<MemberDto>> {
+
+    const rb = new RequestBuilder(this.rootUrl, MemberService.ApiMemberEmailGetPath, 'get');
+    if (params) {
+      rb.path('email', params.email, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'text/json',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<MemberDto>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiMemberEmailGet$Json$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiMemberEmailGet$Json(params: {
+    email: string;
+    context?: HttpContext
+  }
+): Observable<MemberDto> {
+
+    return this.apiMemberEmailGet$Json$Response(params).pipe(
+      map((r: StrictHttpResponse<MemberDto>) => r.body as MemberDto)
+    );
+  }
+
+  /**
+   * Path part for operation apiMemberNameGet
+   */
+  static readonly ApiMemberNameGetPath = '/api/Member/{name}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiMemberNameGet$Plain()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiMemberNameGet$Plain$Response(params: {
+    name: string;
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<MemberDto>> {
+
+    const rb = new RequestBuilder(this.rootUrl, MemberService.ApiMemberNameGetPath, 'get');
+    if (params) {
+      rb.path('name', params.name, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'text',
+      accept: 'text/plain',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<MemberDto>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiMemberNameGet$Plain$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiMemberNameGet$Plain(params: {
+    name: string;
+    context?: HttpContext
+  }
+): Observable<MemberDto> {
+
+    return this.apiMemberNameGet$Plain$Response(params).pipe(
+      map((r: StrictHttpResponse<MemberDto>) => r.body as MemberDto)
+    );
+  }
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiMemberNameGet$Json()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiMemberNameGet$Json$Response(params: {
+    name: string;
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<MemberDto>> {
+
+    const rb = new RequestBuilder(this.rootUrl, MemberService.ApiMemberNameGetPath, 'get');
+    if (params) {
+      rb.path('name', params.name, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'text/json',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<MemberDto>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiMemberNameGet$Json$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiMemberNameGet$Json(params: {
+    name: string;
+    context?: HttpContext
+  }
+): Observable<MemberDto> {
+
+    return this.apiMemberNameGet$Json$Response(params).pipe(
+      map((r: StrictHttpResponse<MemberDto>) => r.body as MemberDto)
+    );
+  }
+
+  /**
    * Path part for operation apiMemberCheckUserExistsPost
    */
   static readonly ApiMemberCheckUserExistsPostPath = '/api/Member/CheckUserExists';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiMemberCheckUserExistsPost()` instead.
+   * To access only the response body, use `apiMemberCheckUserExistsPost$Plain()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiMemberCheckUserExistsPost$Response(params?: {
+  apiMemberCheckUserExistsPost$Plain$Response(params?: {
     context?: HttpContext
     body?: MemberDto
   }
-): Observable<StrictHttpResponse<void>> {
+): Observable<StrictHttpResponse<boolean>> {
 
     const rb = new RequestBuilder(this.rootUrl, MemberService.ApiMemberCheckUserExistsPostPath, 'post');
     if (params) {
@@ -390,30 +584,76 @@ export class MemberService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*',
+      accept: 'text/plain',
       context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        return (r as HttpResponse<any>).clone({ body: String((r as HttpResponse<any>).body) === 'true' }) as StrictHttpResponse<boolean>;
       })
     );
   }
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `apiMemberCheckUserExistsPost$Response()` instead.
+   * To access the full response (for headers, for example), `apiMemberCheckUserExistsPost$Plain$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiMemberCheckUserExistsPost(params?: {
+  apiMemberCheckUserExistsPost$Plain(params?: {
     context?: HttpContext
     body?: MemberDto
   }
-): Observable<void> {
+): Observable<boolean> {
 
-    return this.apiMemberCheckUserExistsPost$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
+    return this.apiMemberCheckUserExistsPost$Plain$Response(params).pipe(
+      map((r: StrictHttpResponse<boolean>) => r.body as boolean)
+    );
+  }
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiMemberCheckUserExistsPost$Json()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiMemberCheckUserExistsPost$Json$Response(params?: {
+    context?: HttpContext
+    body?: MemberDto
+  }
+): Observable<StrictHttpResponse<boolean>> {
+
+    const rb = new RequestBuilder(this.rootUrl, MemberService.ApiMemberCheckUserExistsPostPath, 'post');
+    if (params) {
+      rb.body(params.body, 'application/*+json');
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'text/json',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return (r as HttpResponse<any>).clone({ body: String((r as HttpResponse<any>).body) === 'true' }) as StrictHttpResponse<boolean>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiMemberCheckUserExistsPost$Json$Response()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiMemberCheckUserExistsPost$Json(params?: {
+    context?: HttpContext
+    body?: MemberDto
+  }
+): Observable<boolean> {
+
+    return this.apiMemberCheckUserExistsPost$Json$Response(params).pipe(
+      map((r: StrictHttpResponse<boolean>) => r.body as boolean)
     );
   }
 

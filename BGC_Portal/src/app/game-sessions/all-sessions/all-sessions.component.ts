@@ -1,38 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { GameSessionDto } from 'src/app/api/models';
 import { GameSessionService } from 'src/app/api/services';
-import {MatTableDataSource} from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-all-sessions',
   templateUrl: './all-sessions.component.html',
-  styleUrls: ['./all-sessions.component.css']
+  styleUrls: ['./all-sessions.component.css'],
 })
 export class AllSessionsComponent implements OnInit {
- 
-  displayedColumns: string[] = ['Name','Description'];
-  dataSource : any;
+  public AllGameSessions: GameSessionDto[] = [];
+  subSessions!: Subscription;
+  dataSource: any;
+  displayedColumns: string[] = [
+    'Name',
+    'Description',
+    'MinNumberPlayer',
+    'MaxNumberPlayer',
+  ];
 
-  public AllGameSession : GameSessionDto[] = [];
-  sub! : Subscription;
-
-  constructor(
-    private gameSessionService : GameSessionService
-   ) {}
-  
+  constructor(private gameSessionService: GameSessionService) {}
 
   ngOnInit(): void {
-    this.sub = this.gameSessionService.apiGameSessionGet$Json().subscribe({
-      next : res =>{
-      this.AllGameSession = res,
-      this.dataSource = this.AllGameSession;
-    },
-      error: err => console.log(err)
-    });
+    this.subSessions = this.gameSessionService
+      .apiGameSessionGet$Json()
+      .subscribe({
+        next: (res) => {
+          this.AllGameSessions = res;
+          this.dataSource = this.AllGameSessions;
+        },
+        error: (err) => console.log(err),
+      });
   }
 
-  ngOnDestroy(): void{
-    this.sub.unsubscribe();
+  ngOnDestroy(): void {
+    this.subSessions.unsubscribe();
   }
 }

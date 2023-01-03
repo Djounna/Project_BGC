@@ -1,80 +1,81 @@
-import { Component, OnInit, ViewChild, Inject} from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { MatDialog } from '@angular/material/dialog';
-import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MemberDto } from 'src/app/api/models';
 import { MemberService } from 'src/app/api/services';
-import { HttpContext} from '@angular/common/http';
+import { HttpContext } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-
-  constructor(private authSrv : AuthService, 
+  constructor(
+    private authSrv: AuthService,
     private router: Router,
-    private memberService : MemberService,
-    public dialog: MatDialog ) { }
+    private memberService: MemberService,
+    public dialog: MatDialog
+  ) {}
 
-ngOnInit(): void {
-  }
-  
+  ngOnInit(): void {}
+
   Login() {
     this.authSrv.loginWithRedirect();
     this.checkAndCreateUser();
   }
 
-  checkAndCreateUser(): void{
+  checkAndCreateUser(): void {
     var member: MemberDto = {};
     member.memberId = 0;
     this.authSrv.user$.subscribe({
-      next : res =>{
+      next: (res) => {
         member.name = res?.name;
         member.email = res?.email;
-        this.memberService.apiMemberCheckUserExistsPost$Response({ body: member }).subscribe();
-    },
-    error: res => { console.log(res)}
-  });
-    
+        this.memberService
+          .apiMemberCheckUserExistsPost$Json({ body: member })
+          .subscribe();
+      },
+      error: (res) => {
+        console.log(res);
+      },
+    });
   }
 
-OpenDialogLogout(): void {
+  OpenDialogLogout(): void {
     const dialogRef = this.dialog.open(NavbarDialog);
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
     });
   }
 
-
-Logout(): void{
+  Logout(): void {
     this.authSrv.logout();
-}
-getIsAuth() {
-  return this.authSrv.isAuthenticated$;
-}
+  }
+  getIsAuth() {
+    return this.authSrv.isAuthenticated$;
+  }
 
-MyAccount(): void{
+  MyAccount(): void {
     this.checkAndCreateUser();
-}
-GoToHome(): void{
-  this.router.navigate(['home']);
-}
-GoToCatalog(): void {
-  this.router.navigate(['catalog']);
-}
-GoToCalendar(): void {
-  this.router.navigate(['calendar']);
-} 
-GoToGameSessions(): void {
-  this.router.navigate(['game-sessions'])
-}
+  }
+  GoToHome(): void {
+    this.router.navigate(['home']);
+  }
+  GoToCatalog(): void {
+    this.router.navigate(['catalog']);
+  }
+  GoToCalendar(): void {
+    this.router.navigate(['calendar']);
+  }
+  GoToGameSessions(): void {
+    this.router.navigate(['game-sessions']);
+  }
 }
 
 @Component({
@@ -84,7 +85,7 @@ GoToGameSessions(): void {
 export class NavbarDialog {
   constructor(
     public dialogRef: MatDialogRef<NavbarDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {}
 
   onNoClick(): void {
@@ -96,4 +97,3 @@ export interface DialogData {
   animal: string;
   name: string;
 }
-

@@ -5,6 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BGC_BusinessLogic.Services;
-internal class GameBLL
+public class GameBLL
 {
 }

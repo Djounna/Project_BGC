@@ -1,31 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { GameSessionDto } from '../api/models';
-import { GameSessionService } from '../api/services';
+import { GameSessionDto, MemberDto } from '../api/models';
+import { GameSessionService, MemberService } from '../api/services';
 
 @Component({
   selector: 'app-game-sessions',
   templateUrl: './game-sessions.component.html',
-  styleUrls: ['./game-sessions.component.css']
+  styleUrls: ['./game-sessions.component.css'],
 })
 export class GameSessionsComponent implements OnInit, OnDestroy {
+  constructor() {}
 
-  public AllGameSession : GameSessionDto[] = [];
-  sub! : Subscription;
+  ngOnInit(): void {}
 
-  constructor(
-    private gameSessionService : GameSessionService
-   ) {}
-  
-
-  ngOnInit(): void {
-    this.sub = this.gameSessionService.apiGameSessionGet$Json().subscribe({
-      next : res => this.AllGameSession = res,
-      error: err => console.log(err)
-    });
-  }
-
-  ngOnDestroy(): void{
-    this.sub.unsubscribe();
-  }
+  ngOnDestroy(): void {}
 }

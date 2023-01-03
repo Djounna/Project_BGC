@@ -7,21 +7,21 @@ import { AllSessionsComponent } from './game-sessions/all-sessions/all-sessions.
 import { HomepageComponent } from './homepage/homepage.component';
 import { LoginComponent } from './login/login/login.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { GameSessionsComponent } from './game-sessions/game-sessions.component';
 
 const routes: Routes = [
-  {path : 'home', component : HomepageComponent},
-  {path : '', redirectTo: 'home', pathMatch : 'full'},
-  {path : 'login', component : LoginComponent},
-  {path : 'catalog', component : CatalogComponent},
-  {path : 'calendar', component : CalendarComponent},
-  {path : 'game-sessions', component: AllSessionsComponent},
-  {path : 'not-found', component: NotFoundComponent},
-  {path : '**', redirectTo : 'not-found'},
-
+  { path: 'home', component: HomepageComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'catalog', component: CatalogComponent },
+  { path: 'calendar', component: CalendarComponent },
+  { path: 'game-sessions', component: GameSessionsComponent },
+  { path: 'not-found', component: NotFoundComponent },
+  { path: '**', redirectTo: 'not-found' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

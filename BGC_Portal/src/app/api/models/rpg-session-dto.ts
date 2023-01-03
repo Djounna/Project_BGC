@@ -1,10 +1,10 @@
 /* tslint:disable */
 /* eslint-disable */
-import { GameTable } from './game-table';
-import { RpgCampaign } from './rpg-campaign';
+import { GameTableDto } from './game-table-dto';
+import { RpgCampaignDto } from './rpg-campaign-dto';
 import { SessionStatus } from './session-status';
 export interface RpgSessionDto {
-  campaign?: RpgCampaign;
+  campaign?: RpgCampaignDto;
   description?: null | string;
   gameTableId?: null | number;
   name?: null | string;
@@ -12,5 +12,5 @@ export interface RpgSessionDto {
   rpgSessionId?: number;
   schedule?: string;
   status?: SessionStatus;
-  table?: GameTable;
+  table?: GameTableDto;
 }

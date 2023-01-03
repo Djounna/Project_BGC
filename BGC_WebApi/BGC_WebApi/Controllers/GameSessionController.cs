@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BGC_BusinessLogic.Services;
 using BGC_DataAccess.Entities;
 using BGC_DataAccess.Interfaces;
 using BGC_DataAccess.Services;
@@ -14,12 +15,13 @@ namespace BGC_WebApi.Controllers;
 public class GameSessionController : BaseController
 {
 	private IGameSessionService gameSessionService;
-	public GameSessionController(IGameSessionService gameSessionService, IMapper mapper) : base(mapper)
+    private GameSessionBLL gameSessionBLL;
+	public GameSessionController(IGameSessionService gameSessionService, GameSessionBLL gameSessionBLL, IMapper mapper) : base(mapper)
 	{
 		this.gameSessionService= gameSessionService;
 	}
     /// <summary>
-    /// Get ALl GameSessions
+    /// Get All GameSessions
     /// </summary>
     [HttpGet]
     public async Task<ActionResult<IEnumerable<GameSessionDTO>>> GetAll()
@@ -72,5 +74,16 @@ public class GameSessionController : BaseController
     public void Delete(int id)
     {
         //TO DO
+    }
+
+    /// <summary>
+    /// Get all gamesessions by member
+    /// </summary>
+    /// <param name="memberName">Name of member</param>
+    [HttpGet]
+    [Route("memberName")]
+    public async Task<ActionResult<IEnumerable<GameSessionDTO>>> GetAllByMember(string memberName)
+    {
+        return Ok(mapper.Map<IEnumerable<GameSessionDTO>>(await gameSessionBLL.GetAllByMember(memberName)));
     }
 }

@@ -50,7 +50,7 @@ public class GameSessionDTO
     /// <summary>
     /// Organizer of the session
     /// </summary>
-    public Member Organizer { get; set; }
+    public MemberDTO Organizer { get; set; }
     
     /// <summary>
     /// Game table Id
@@ -60,5 +60,5 @@ public class GameSessionDTO
     /// <summary>
     /// GameTable
     /// </summary>
-    public GameTable Table { get; set; }
+    public GameTableDTO Table { get; set; }
 }

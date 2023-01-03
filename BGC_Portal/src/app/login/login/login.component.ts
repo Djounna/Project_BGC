@@ -11,40 +11,45 @@ import { MemberDto } from 'src/app/api/models';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  response = "";
+  response = '';
 
-  constructor(private authSrv : AuthService, private memberService: MemberService, private http : HttpClient) {}
+  constructor(
+    private authSrv: AuthService,
+    private memberService: MemberService,
+    private http: HttpClient
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  getToken(){
+  getToken() {
     this.response = 'wait for response...';
     this.authSrv.getAccessTokenSilently().subscribe({
       next: (t) => {
-       const helper = new JwtHelperService();
-       const decodeToken = helper.decodeToken(t);
-       this.response = 'perm = ' + decodeToken["permissions"];
-      }
-    })
+        const helper = new JwtHelperService();
+        const decodeToken = helper.decodeToken(t);
+        this.response = 'perm = ' + decodeToken['permissions'];
+      },
+    });
   }
 
-  callPrivate(scope : string) {
-    this.response = "wait for response ...";
+  callPrivate(scope: string) {
+    this.response = 'wait for response ...';
     this.authSrv.getAccessTokenSilently().subscribe({
-      next : (token) => {
-        this.http.get<String>(
-          'http://localhost:7139/api/member/login' + scope,
-          { headers: new HttpHeaders({ "Authorization": "Bearer " + token }) }
-        ).subscribe({
-          next : (r) => this.response = JSON.stringify(r),
-          error : (e) => this.response = 'API call error ' + JSON.stringify(e)
-        });
-      }
-    })
+      next: (token) => {
+        this.http
+          .get<String>('http://localhost:7139/api/member/login' + scope, {
+            headers: new HttpHeaders({ Authorization: 'Bearer ' + token }),
+          })
+          .subscribe({
+            next: (r) => (this.response = JSON.stringify(r)),
+            error: (e) =>
+              (this.response = 'API call error ' + JSON.stringify(e)),
+          });
+      },
+    });
   }
 
   login() {
@@ -52,22 +57,22 @@ export class LoginComponent implements OnInit {
     this.checkAndCreateUser();
   }
 
-  checkAndCreateUser(): void{
+  checkAndCreateUser(): void {
     var member!: MemberDto;
     member.name = 'test';
     member.email = 'test';
-    this.memberService.apiMemberCheckUserExistsPost({ body: member }).subscribe( () => {
-      next: ;
-      error: ;
-    }
-    
-    );
+    this.memberService
+      .apiMemberCheckUserExistsPost$Json({ body: member })
+      .subscribe(() => {
+        next:;
+        error:;
+      });
   }
 
   logout() {
     this.authSrv.logout();
   }
-  
+
   getIsAuth() {
     return this.authSrv.isAuthenticated$;
   }
@@ -75,5 +80,4 @@ export class LoginComponent implements OnInit {
   getUser() {
     return this.authSrv.user$;
   }
-
 }

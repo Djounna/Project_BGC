@@ -18,7 +18,7 @@ public class RpgSessionGameDTO
     /// <summary>
     /// RPG Session
     /// </summary>
-    public RpgSession RpgSession { get; set; }
+    public RpgSessionDTO RpgSession { get; set; }
     /// <summary>
     /// Id of the game version
     /// </summary>
@@ -26,5 +26,5 @@ public class RpgSessionGameDTO
     /// <summary>
     /// Id of the game version
     /// </summary>
-    public GameVersion GameVersion { get; set; }
+    public GameVersionDTO GameVersion { get; set; }
 }

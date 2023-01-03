@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
-import { GameTable } from './game-table';
-import { Member } from './member';
+import { GameTableDto } from './game-table-dto';
+import { MemberDto } from './member-dto';
 import { SessionStatus } from './session-status';
 export interface GameSessionDto {
   description?: null | string;
@@ -11,9 +11,9 @@ export interface GameSessionDto {
   maxNumberPlayers?: null | number;
   minNumberPlayers?: null | number;
   name?: null | string;
-  organizer?: Member;
+  organizer?: MemberDto;
   organizerId?: null | number;
   schedule?: string;
   status?: SessionStatus;
-  table?: GameTable;
+  table?: GameTableDto;
 }

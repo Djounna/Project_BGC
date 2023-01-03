@@ -22,6 +22,18 @@ public class GameSessionRegistrationService : BaseService, IGameSessionRegistrat
         return await BgcContext.GameSessionRegistrations.ToListAsync();
     }
 
+    public async Task<IEnumerable<GameSessionRegistration>> GetAllByMemberId(int memberId)
+    {
+        return await BgcContext.GameSessionRegistrations.Where(g => g.MemberId == memberId).ToListAsync();
+    }
+
+    //public async Task<IEnumerable<GameSessionRegistration>> GetAllByMemberId(int memberId)
+    //{
+    //    var res = await BgcContext.Members.Where(m => m.MemberId == memberId).Include(m => m.GameSessionRegistrations).ToListAsync();
+
+    //    return res;
+    //}
+
     public async Task<bool> Insert(GameSessionRegistration gameSessionRegistration)
     {
         BgcContext.GameSessionRegistrations.Add(gameSessionRegistration);

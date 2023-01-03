@@ -366,4 +366,101 @@ export class GameSessionService extends BaseService {
     );
   }
 
+  /**
+   * Path part for operation apiGameSessionMemberNameGet
+   */
+  static readonly ApiGameSessionMemberNameGetPath = '/api/GameSession/memberName';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiGameSessionMemberNameGet$Plain()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiGameSessionMemberNameGet$Plain$Response(params?: {
+    memberName?: string;
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<GameSessionDto>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, GameSessionService.ApiGameSessionMemberNameGetPath, 'get');
+    if (params) {
+      rb.query('memberName', params.memberName, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'text',
+      accept: 'text/plain',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<GameSessionDto>>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiGameSessionMemberNameGet$Plain$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiGameSessionMemberNameGet$Plain(params?: {
+    memberName?: string;
+    context?: HttpContext
+  }
+): Observable<Array<GameSessionDto>> {
+
+    return this.apiGameSessionMemberNameGet$Plain$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<GameSessionDto>>) => r.body as Array<GameSessionDto>)
+    );
+  }
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiGameSessionMemberNameGet$Json()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiGameSessionMemberNameGet$Json$Response(params?: {
+    memberName?: string;
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<GameSessionDto>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, GameSessionService.ApiGameSessionMemberNameGetPath, 'get');
+    if (params) {
+      rb.query('memberName', params.memberName, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'text/json',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<GameSessionDto>>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiGameSessionMemberNameGet$Json$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiGameSessionMemberNameGet$Json(params?: {
+    memberName?: string;
+    context?: HttpContext
+  }
+): Observable<Array<GameSessionDto>> {
+
+    return this.apiGameSessionMemberNameGet$Json$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<GameSessionDto>>) => r.body as Array<GameSessionDto>)
+    );
+  }
+
 }

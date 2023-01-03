@@ -28,5 +28,8 @@ public class GameDTO
     /// </summary>
     public int? MaxNumberPlayers { get; set; }
 
-    //public ICollection<GameVersion> Versions { get; set; }
+    /// <summary>
+    /// Game versions for this game
+    /// </summary>
+    public ICollection<GameVersionDTO> Versions { get; set; }
 }

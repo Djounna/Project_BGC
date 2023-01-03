@@ -18,7 +18,7 @@ public class RpgCampaignRegistrationDTO
     /// <summary>
     /// Player
     /// </summary>
-    public Member Player { get; set; }
+    public MemberDTO Player { get; set; }
     /// <summary>
     /// Id of the RPG campaign
     /// </summary>
@@ -26,5 +26,5 @@ public class RpgCampaignRegistrationDTO
     /// <summary>
     /// RPG campaign
     /// </summary>
-    public RpgCampaign RpgCampaign { get; set; }
+    public RpgCampaignDTO RpgCampaign { get; set; }
 }

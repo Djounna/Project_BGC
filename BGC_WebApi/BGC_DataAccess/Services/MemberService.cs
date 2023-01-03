@@ -18,6 +18,16 @@ public class MemberService : BaseService, IMemberService
         return await BgcContext.Members.FindAsync(id);
     }
 
+    public async Task<Member> GetByEmail(string email)
+    {
+        return await BgcContext.Members.SingleOrDefaultAsync(m => m.Email == email);
+    }
+
+    public async Task<Member> GetByName(string name)
+    {
+        return await BgcContext.Members.SingleOrDefaultAsync(m => m.Name == name);
+    }
+
     public async Task<IEnumerable<Member>> GetAll()
     {
         return await BgcContext.Members.ToListAsync();

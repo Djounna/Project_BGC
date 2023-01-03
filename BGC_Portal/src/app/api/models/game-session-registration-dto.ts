@@ -1,11 +1,11 @@
 /* tslint:disable */
 /* eslint-disable */
-import { GameSession } from './game-session';
-import { Member } from './member';
+import { GameSessionDto } from './game-session-dto';
+import { MemberDto } from './member-dto';
 export interface GameSessionRegistrationDto {
-  gameSession?: GameSession;
+  gameSession?: GameSessionDto;
   gameSessionId?: number;
   gameSessionRegistrationId?: number;
   memberId?: number;
-  player?: Member;
+  player?: MemberDto;
 }

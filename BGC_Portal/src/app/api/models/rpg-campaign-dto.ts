@@ -1,10 +1,10 @@
 /* tslint:disable */
 /* eslint-disable */
-import { Member } from './member';
+import { MemberDto } from './member-dto';
 export interface RpgCampaignDto {
   description?: null | string;
   name?: null | string;
-  organizer?: Member;
+  organizer?: MemberDto;
   organizerId?: null | number;
   rpgCampaignId?: number;
 }

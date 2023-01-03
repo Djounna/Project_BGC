@@ -47,8 +47,30 @@ public class MemberController : BaseController
     }
 
     /// <summary>
+    /// Get Member by email
+    /// </summary>
+    /// <param name="email">Email</param>
+    [HttpGet]
+    [Route("{email}")]
+    public async Task<ActionResult<MemberDTO>> GetByEmail(string email)
+    {
+        return Ok(mapper.Map<MemberDTO>(await memberService.GetByEmail(email)));
+    }
+
+    /// <summary>
+    /// Get Member by name
+    /// </summary>
+    /// <param name="name">Name</param>
+    [HttpGet]
+    [Route("{name}")]
+    public async Task<ActionResult<MemberDTO>> GetByName(string name)
+    {
+        return Ok(mapper.Map<MemberDTO>(await memberService.GetByName(name)));
+    }
+    /// <summary>
     /// Create a new Member
     /// </summary>
+    /// <param name="MemberDTO">DTO for member</param>
     [HttpPost]
     public async Task<ActionResult> Post([FromBody] MemberDTO MemberDTO)
     {
@@ -56,10 +78,11 @@ public class MemberController : BaseController
         return Ok();
     }
 
-
     /// <summary>
     ///  Update a Member
     /// </summary>
+    /// <param name="id">Id</param>
+    /// <param name="MemberDTO">DTO for member</param>
     [HttpPut]
     public async Task<ActionResult> Put(int id, [FromBody] MemberDTO MemberDTO)
     {

@@ -35,7 +35,7 @@ public class RpgSessionDTO
     /// <summary>
     /// RPG campaign
     /// </summary>
-    public RpgCampaign Campaign { get; set; }
+    public RpgCampaignDTO Campaign { get; set; }
     /// <summary>
     /// Id of the game table
     /// </summary>
@@ -43,7 +43,7 @@ public class RpgSessionDTO
     /// <summary>
     /// Game table
     /// </summary>
-    public GameTable Table { get; set; }
+    public GameTableDTO Table { get; set; }
 
     //public ICollection<RpgSessionGame> RpgSessionGames { get; set; }
 }

@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
-import { Game } from './game';
+import { GameDto } from './game-dto';
 export interface GameVersionDto {
-  game?: Game;
+  game?: GameDto;
   gameId?: number;
   gameVersionId?: number;
 }

@@ -39,9 +39,9 @@ builder.Services.AddScoped<IGameTableService,GameTableService>();
 
 //Services : Business
 builder.Services.AddScoped<MemberBLL>();
-//builder.Services.AddScoped<GameBLL>();
+builder.Services.AddScoped<GameBLL>();
 //builder.Services.AddScoped<GameSessionGameBLL>();
-//builder.Services.AddScoped<GameSessionBLL>();
+builder.Services.AddScoped<GameSessionBLL>();
 //builder.Services.AddScoped<GameSessionRegistrationBLL>();
 //builder.Services.AddScoped<GameVersionBLL>();
 //builder.Services.AddScoped<RpgCampaignRegistrationBLL>();
