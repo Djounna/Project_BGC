@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { Subscription } from 'rxjs';
 import { GameSessionDto } from 'src/app/api/models';
-import { GameSessionService, MemberService } from 'src/app/api/services';
+import { GameSessionService } from 'src/app/api/services';
 
 @Component({
   selector: 'app-member-sessions',
@@ -17,10 +17,14 @@ export class MemberSessionsComponent implements OnInit {
   sub!: Subscription;
   subSessions!: Subscription;
 
-  displayedColumns: string[] = ['Name', 'Description'];
+  displayedColumns: string[] = [
+    'Name',
+    'Description',
+    'MinNumberPlayer',
+    'MaxNumberPlayer',
+  ];
 
   constructor(
-    private memberService: MemberService,
     private gameSessionService: GameSessionService,
     private authService: AuthService
   ) {}
