@@ -1,1 +1,36 @@
-<p>add-game works!</p>
+<form class="form_base" [formGroup]="newGameForm">
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <input matInput id="name" type="text" formControlName="Name" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Description</mat-label>
+    <textarea
+      matInput
+      id="description"
+      type="text"
+      formControlName="Description"
+    ></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Nombre joueurs max</mat-label>
+    <input
+      matInput
+      id="maxNumberPlayer"
+      type="text"
+      formControlName="MaxNumberPlayers"
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Nombre joueurs min</mat-label>
+    <input
+      matInput
+      id="minNumberPlayer"
+      type="text"
+      formControlName="MinNumberPlayers"
+    />
+  </mat-form-field>
+</form>

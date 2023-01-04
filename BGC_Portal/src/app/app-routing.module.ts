@@ -8,6 +8,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { LoginComponent } from './login/login/login.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { GameSessionsComponent } from './game-sessions/game-sessions.component';
+import { AddGameComponent } from './catalog/add-game/add-game.component';
 
 const routes: Routes = [
   { path: 'home', component: HomepageComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'catalog', component: CatalogComponent },
   { path: 'calendar', component: CalendarComponent },
   { path: 'game-sessions', component: GameSessionsComponent },
+  { path: 'add-game', component: AddGameComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', redirectTo: 'not-found' },
 ];

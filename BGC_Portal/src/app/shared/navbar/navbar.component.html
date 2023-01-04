@@ -1,46 +1,81 @@
-  <mat-toolbar>
+<mat-toolbar>
   <div>
-  <div class="button-row">
-    <button mat-raised-button color="primary" (click)="GoToHome()" >Acceuil</button>
-  </div>
+    <div class="button-row">
+      <button mat-raised-button color="primary" (click)="GoToHome()">
+        Acceuil
+      </button>
+    </div>
 
-  <div class="button-row">
-    <button mat-raised-button color="accent" [matMenuTriggerFor]="calendarMenu">Calendrier</button>
+    <div class="button-row">
+      <button
+        mat-raised-button
+        color="accent"
+        [matMenuTriggerFor]="calendarMenu"
+      >
+        Calendrier
+      </button>
       <mat-menu #calendarMenu="matMenu" yPosition="below">
         <button mat-menu-item (click)="GoToCalendar()">Jeux de société</button>
         <button mat-menu-item>Jeux de rôle</button>
       </mat-menu>
-  </div>
+    </div>
 
-  <div class="button-row">
-    <button mat-raised-button color="accent" [matMenuTriggerFor]="CatalogMenu">Catalogue</button>
+    <div class="button-row">
+      <button
+        mat-raised-button
+        color="accent"
+        [matMenuTriggerFor]="CatalogMenu"
+      >
+        Catalogue
+      </button>
       <mat-menu #CatalogMenu="matMenu" yPosition="below">
         <button mat-menu-item (click)="GoToCatalog()">Jeux de société</button>
         <button mat-menu-item>Jeux de rôle</button>
-    </mat-menu>
-  </div>
+      </mat-menu>
+    </div>
 
-  <div class="button-row">
-    <button mat-raised-button color="primary" [matMenuTriggerFor]="MemberMenu">Mes parties</button>
+    <div class="button-row">
+      <button
+        mat-raised-button
+        color="primary"
+        [matMenuTriggerFor]="MemberMenu"
+      >
+        Mes parties
+      </button>
       <mat-menu #MemberMenu="matMenu" yPosition="below">
         <button mat-menu-item (click)="GoToGameSessions()">Archives</button>
-        <button mat-menu-item>A venir</button>
+        <button mat-menu-item (click)="AddGame()">A venir</button>
       </mat-menu>
-  </div>
-</div>
-
-<div class="toobar_login">
-  <div class="button-row">
-    <button mat-raised-button color="accent" *ngIf="(getIsAuth() | async) === false" (click)="Login()">Login</button>
+    </div>
   </div>
 
-  <div class="button-row">
-    <button mat-raised-button color="accent" *ngIf="(getIsAuth() | async) === true" (click)="Logout()">Logout</button>
-  </div>
-  
-  <div class="button-row">
-    <button mat-raised-button color="primary" (click)="MyAccount()">Mon compte</button>
-  </div>
-</div>
+  <div class="toobar_login">
+    <div class="button-row">
+      <button
+        mat-raised-button
+        color="accent"
+        *ngIf="(getIsAuth() | async) === false"
+        (click)="Login()"
+      >
+        Login
+      </button>
+    </div>
 
+    <div class="button-row">
+      <button
+        mat-raised-button
+        color="accent"
+        *ngIf="(getIsAuth() | async) === true"
+        (click)="Logout()"
+      >
+        Logout
+      </button>
+    </div>
+
+    <div class="button-row">
+      <button mat-raised-button color="primary" (click)="MyAccount()">
+        Mon compte
+      </button>
+    </div>
+  </div>
 </mat-toolbar>

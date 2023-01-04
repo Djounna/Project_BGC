@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthModule } from '@auth0/auth0-angular';
@@ -22,6 +23,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { LoginComponent } from './login/login/login.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { GameCardComponent } from './catalog/game-card/game-card.component';
 import { AddGameComponent } from './catalog/add-game/add-game.component';
@@ -54,8 +56,11 @@ import { MemberSessionsComponent } from './game-sessions/member-sessions/member-
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
+    MatInputModule,
     MatCardModule,
     MatMenuModule,
     MatButtonModule,

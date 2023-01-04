@@ -76,6 +76,9 @@ export class NavbarComponent implements OnInit {
   GoToGameSessions(): void {
     this.router.navigate(['game-sessions']);
   }
+  AddGame(): void {
+    this.router.navigate(['add-game']);
+  }
 }
 
 @Component({
