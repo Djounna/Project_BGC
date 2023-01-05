@@ -1,9 +1,12 @@
-<p>catalog works!</p>
+<div class="buttons">
+  <button mat-raised-button color="warn" (click)="addGameDialog()">
+    New Game
+  </button>
+</div>
 
+<br />
 <div class="catalog_cards">
-    <div *ngFor="let game of games; let i = index" >
-
+  <div *ngFor="let game of games; let i = index">
     <app-game-card [Game]="game"></app-game-card>
-
-    </div>
+  </div>
 </div>

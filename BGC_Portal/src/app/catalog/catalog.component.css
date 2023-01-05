@@ -1,5 +1,11 @@
-.catalog_cards{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+.catalog_cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }

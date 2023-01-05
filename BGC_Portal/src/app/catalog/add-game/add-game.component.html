@@ -34,3 +34,15 @@
     />
   </mat-form-field>
 </form>
+
+<div class="buttons">
+  <button
+    mat-button
+    color="primary"
+    [disabled]="newGameForm.status === 'INVALID'"
+    (click)="saveNewGame()"
+  >
+    Add Game
+  </button>
+  <button mat-button color="warn" (click)="closeDialog()">Cancel</button>
+</div>
