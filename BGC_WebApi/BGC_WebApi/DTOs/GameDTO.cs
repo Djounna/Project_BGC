@@ -31,5 +31,5 @@ public class GameDTO
     /// <summary>
     /// Game versions for this game
     /// </summary>
-    public ICollection<GameVersionDTO> Versions { get; set; }
+    public ICollection<GameVersionDTO> Versions { get; set; } = new List<GameVersionDTO>();
 }
