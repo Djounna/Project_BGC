@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, Subscription } from 'rxjs';
 import { GameDto } from '../api/models';
 import { GameService } from '../api/services';
@@ -15,7 +16,11 @@ export class CatalogComponent implements OnInit, OnDestroy {
   sub!: Subscription;
   newGame: GameDto = {};
 
-  constructor(private gameService: GameService, public dialog: MatDialog) {}
+  constructor(
+    private gameService: GameService,
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.sub = this.gameService.apiGameGet$Json().subscribe({
@@ -34,9 +39,26 @@ export class CatalogComponent implements OnInit, OnDestroy {
       data: this.newGame,
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-      this.newGame = result;
+    dialogRef.afterClosed().subscribe({
+      next: (res) => {
+        this.newGame = res;
+        this.newGame.gameId = 0;
+        this.gameService.apiGamePost({ body: this.newGame }).subscribe({
+          next: (res) => console.log(res),
+          error: (err) => console.log(err),
+          complete: () => {
+            console.log('new game successfully created');
+            this.openSnackBar('Nouveau jeu ajouté avec succès');
+          },
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
+  }
+
+  openSnackBar(message: string) {
+    this.snackBar.open(message, '', { duration: 4000 });
   }
 }

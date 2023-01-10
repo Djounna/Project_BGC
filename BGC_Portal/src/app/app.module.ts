@@ -25,6 +25,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { GameCardComponent } from './catalog/game-card/game-card.component';
 import { AddGameComponent } from './catalog/add-game/add-game.component';
 import { GameSessionsComponent } from './game-sessions/game-sessions.component';
@@ -70,6 +71,7 @@ import { MemberSessionsComponent } from './game-sessions/member-sessions/member-
     MatDialogModule,
     MatIconModule,
     MatSidenavModule,
+    MatSnackBarModule,
     HttpClientModule,
     ApiModule.forRoot({ rootUrl: 'https://localhost:7139' }),
     AuthModule.forRoot({

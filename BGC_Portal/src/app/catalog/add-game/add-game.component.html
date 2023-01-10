@@ -1,6 +1,8 @@
+<h5>Ajouter un jeu au catalogue</h5>
+
 <form class="form_base" [formGroup]="newGameForm">
   <mat-form-field appearance="fill">
-    <mat-label>Name</mat-label>
+    <mat-label>Nom</mat-label>
     <input matInput id="name" type="text" formControlName="Name" />
   </mat-form-field>
 
@@ -15,22 +17,22 @@
   </mat-form-field>
 
   <mat-form-field appearance="fill">
-    <mat-label>Nombre joueurs max</mat-label>
-    <input
-      matInput
-      id="maxNumberPlayer"
-      type="text"
-      formControlName="MaxNumberPlayers"
-    />
-  </mat-form-field>
-
-  <mat-form-field appearance="fill">
     <mat-label>Nombre joueurs min</mat-label>
     <input
       matInput
       id="minNumberPlayer"
-      type="text"
+      type="number"
       formControlName="MinNumberPlayers"
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Nombre joueurs max</mat-label>
+    <input
+      matInput
+      id="maxNumberPlayer"
+      type="number"
+      formControlName="MaxNumberPlayers"
     />
   </mat-form-field>
 </form>
@@ -39,10 +41,10 @@
   <button
     mat-button
     color="primary"
-    [disabled]="newGameForm.status === 'INVALID'"
+    [disabled]="newGameForm.invalid"
     (click)="saveNewGame()"
   >
-    Add Game
+    Ajouter
   </button>
-  <button mat-button color="warn" (click)="closeDialog()">Cancel</button>
+  <button mat-button color="warn" (click)="closeDialog()">Annuler</button>
 </div>
