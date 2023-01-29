@@ -1,0 +1,20 @@
+<h5>Modifier une version du jeu en stock</h5>
+
+<form class="form_base" [formGroup]="versionForm">
+  <mat-form-field appearance="fill">
+    <mat-label>Nom</mat-label>
+    <input matInput id="name" type="text" formControlName="name" />
+  </mat-form-field>
+</form>
+
+<div class="buttons">
+  <button
+    mat-button
+    color="primary"
+    [disabled]="versionForm.invalid"
+    (click)="udpateVersion()"
+  >
+    Modifier
+  </button>
+  <button mat-button color="warn" (click)="closeDialog()">Annuler</button>
+</div>

@@ -4,9 +4,11 @@
   <div *ngFor="let version of gameVersions">
     <li>
       {{ version.name }}
-      <button mat-button color="warn">Modifier</button>
+      <button mat-button color="warn" (click)="updateVersionDialog(version)">
+        Modifier
+      </button>
     </li>
   </div>
 </div>
 
-<button mat-button color="primary">Ajouter</button>
+<button mat-button color="primary" (click)="addVersionDialog()">Ajouter</button>

@@ -35,7 +35,7 @@ public class GameVersionService : BaseService, IGameVersionService
 
         if (toUpdate != null)
         {
-            //TO DO
+            toUpdate.Name = gameVersion.Name;
             return await BgcContext.SaveChangesAsync() >=1;
         }
         return false;

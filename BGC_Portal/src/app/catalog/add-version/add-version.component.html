@@ -1,0 +1,20 @@
+<h5>Ajouter une version du jeu en stock</h5>
+
+<form class="form_base" [formGroup]="newVersionForm">
+  <mat-form-field appearance="fill">
+    <mat-label>Nom</mat-label>
+    <input matInput id="name" type="text" formControlName="name" />
+  </mat-form-field>
+</form>
+
+<div class="buttons">
+  <button
+    mat-button
+    color="primary"
+    [disabled]="newVersionForm.invalid"
+    (click)="saveNewVersion()"
+  >
+    Ajouter
+  </button>
+  <button mat-button color="warn" (click)="closeDialog()">Annuler</button>
+</div>

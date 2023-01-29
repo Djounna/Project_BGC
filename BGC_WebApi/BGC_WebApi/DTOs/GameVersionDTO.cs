@@ -22,7 +22,7 @@ public class GameVersionDTO
     /// <summary>
     /// Game
     /// </summary>
-    public GameDTO Game { get; set; }
+    public GameDTO? Game { get; set; }
 
     //public ICollection<GameSessionGame> GameSessionGames { get; set; }
     //public ICollection<RpgSessionGame> RpgSessionGames { get; set; }

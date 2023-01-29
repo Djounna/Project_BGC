@@ -40,6 +40,8 @@ import { OrganizerSessionsComponent } from './game-sessions/organizer-sessions/o
 import { TablesComponent } from './tables/tables.component';
 import { UpdateGameComponent } from './catalog/update-game/update-game.component';
 import { GameVersionsComponent } from './catalog/game-versions/game-versions.component';
+import { AddVersionComponent } from './catalog/add-version/add-version.component';
+import { UpdateVersionComponent } from './catalog/update-version/update-version.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,6 +62,8 @@ import { GameVersionsComponent } from './catalog/game-versions/game-versions.com
     TablesComponent,
     UpdateGameComponent,
     GameVersionsComponent,
+    AddVersionComponent,
+    UpdateVersionComponent,
   ],
   imports: [
     BrowserModule,
