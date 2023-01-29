@@ -10,7 +10,7 @@ namespace BGC_DataAccess.Entities;
 public class GameVersion
 {
     public int GameVersionId { get; set; }
-    
+    public string Name { get; set; }
     public int GameId { get; set; } 
     public Game Game { get; set; }
 
@@ -22,6 +22,7 @@ public class GameeVersionConfiguration : IEntityTypeConfiguration<GameVersion>
 {
     public void Configure(EntityTypeBuilder<GameVersion> builder)
     {
-        builder.Property(g => g.Game).IsRequired();
+        builder.Property(g => g.Name).IsRequired().HasMaxLength(256);
+        builder.Property(g => g.GameId).IsRequired();
     }
 }

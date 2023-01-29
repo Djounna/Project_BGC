@@ -38,6 +38,8 @@ public class GameService : BaseService, IGameService
             GameToUpdate.Name = game.Name;
             GameToUpdate.MaxNumberPlayers = game.MaxNumberPlayers;
             GameToUpdate.MinNumberPlayers = game.MinNumberPlayers;
+            GameToUpdate.ImageLink = game.ImageLink;
+            GameToUpdate.Year = game.Year;
 
             return await BgcContext.SaveChangesAsync() >=1;
             

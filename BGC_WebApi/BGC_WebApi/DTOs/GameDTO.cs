@@ -20,6 +20,14 @@ public class GameDTO
     /// </summary>
     public string? Description { get; set; }
     /// <summary>
+    /// Release Year
+    /// </summary>
+    public int? Year { get; set; }
+    /// <summary>
+    /// url of the Image
+    /// </summary>
+    public string? ImageLink { get; set; }
+    /// <summary>
     /// Minimum number of players
     /// </summary>
     public int? MinNumberPlayers { get; set; }

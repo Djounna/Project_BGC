@@ -1,0 +1,12 @@
+<h5>Versions en stock</h5>
+
+<div>
+  <div *ngFor="let version of gameVersions">
+    <li>
+      {{ version.name }}
+      <button mat-button color="warn">Modifier</button>
+    </li>
+  </div>
+</div>
+
+<button mat-button color="primary">Ajouter</button>

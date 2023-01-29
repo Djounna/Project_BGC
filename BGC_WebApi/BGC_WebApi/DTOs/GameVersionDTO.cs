@@ -11,7 +11,10 @@ public class GameVersionDTO
     /// Id
     /// </summary>
     public int GameVersionId { get; set; }
-
+    /// <summary>
+    /// Name of the version
+    /// </summary>
+    public string Name { get; set; }
     /// <summary>
     /// Id of the game
     /// </summary>

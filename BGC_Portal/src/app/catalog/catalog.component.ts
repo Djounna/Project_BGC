@@ -14,6 +14,7 @@ import { AddGameComponent } from './add-game/add-game.component';
 export class CatalogComponent implements OnInit, OnDestroy {
   games!: GameDto[];
   sub!: Subscription;
+  sub2!: Subscription;
   newGame: GameDto = {};
 
   constructor(
@@ -32,6 +33,9 @@ export class CatalogComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+    if (this.sub2) {
+      this.sub2.unsubscribe();
+    }
   }
 
   addGameDialog(): void {
@@ -43,14 +47,17 @@ export class CatalogComponent implements OnInit, OnDestroy {
       next: (res) => {
         this.newGame = res;
         this.newGame.gameId = 0;
-        this.gameService.apiGamePost({ body: this.newGame }).subscribe({
-          next: (res) => console.log(res),
-          error: (err) => console.log(err),
-          complete: () => {
-            console.log('new game successfully created');
-            this.openSnackBar('Nouveau jeu ajouté avec succès');
-          },
-        });
+        this.sub2 = this.gameService
+          .apiGamePost({ body: this.newGame })
+          .subscribe({
+            next: (res) => console.log(res),
+            error: (err) => console.log(err),
+            complete: () => {
+              console.log('new game successfully created');
+              this.openSnackBar('Nouveau jeu ajouté avec succès');
+              this.ngOnInit();
+            },
+          });
       },
       error: (err) => {
         console.log(err);

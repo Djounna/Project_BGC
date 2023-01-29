@@ -1690,6 +1690,15 @@
             "type": "string",
             "nullable": true
           },
+          "year": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "imageLink": {
+            "type": "string",
+            "nullable": true
+          },
           "minNumberPlayers": {
             "type": "integer",
             "format": "int32",
@@ -1810,6 +1819,10 @@
           "gameVersionId": {
             "type": "integer",
             "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
           },
           "gameId": {
             "type": "integer",

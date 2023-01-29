@@ -35,12 +35,14 @@ export class AddGameComponent implements OnInit {
     Description: ['', Validators.required],
     MinNumberPlayers: [
       0,
-      [Validators.required, Validators.min(2), Validators.max(8)],
+      [Validators.required, Validators.min(1), Validators.max(8)],
     ],
     MaxNumberPlayers: [
       0,
       [Validators.required, Validators.min(2), Validators.max(8)],
     ],
+    ImageLink: ['', [Validators.required, Validators.maxLength(300)]],
+    year: [[Validators.min(0), Validators.max(2030)]],
   });
 
   saveNewGame(): void {
@@ -50,9 +52,10 @@ export class AddGameComponent implements OnInit {
         description: this.newGameForm.value.Description,
         minNumberPlayers: this.newGameForm.value.MinNumberPlayers,
         maxNumberPlayers: this.newGameForm.value.MaxNumberPlayers,
+        imageLink: this.newGameForm.value.ImageLink,
+        year: this.newGameForm.value.year,
       };
       this.dialogRef.close(this.newGame);
-      this.openSnackBar('Nouveau jeu ajouté avec succès');
     } else {
       this.openSnackBar('Le formulaire est incorrect');
     }

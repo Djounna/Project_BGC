@@ -5,4 +5,5 @@ export interface GameVersionDto {
   game?: GameDto;
   gameId?: number;
   gameVersionId?: number;
+  name?: null | string;
 }

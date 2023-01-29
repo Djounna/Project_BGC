@@ -1,22 +1,36 @@
-<mat-card class="example-card">
-  <mat-card-header>
-    <mat-card-title-group>
-      <mat-card-title>{{ Game.name }}</mat-card-title>
-      <mat-card-subtitle
-        >{{ Game.minNumberPlayers }} à
-        {{ Game.maxNumberPlayers }} joueurs</mat-card-subtitle
-      >
-      <img
-        mat-card-lg-image
-        src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-      />
-    </mat-card-title-group>
-  </mat-card-header>
+<mat-card class="game-card">
+  <mat-card-title-group class="game-card_titleGroup">
+    <mat-card-title>{{ Game.name }}</mat-card-title>
+    <mat-card-subtitle>{{ Game.year }}</mat-card-subtitle>
+    <mat-card-subtitle
+      >{{ Game.minNumberPlayers }} à
+      {{ Game.maxNumberPlayers }} joueurs</mat-card-subtitle
+    >
+    <img class="game-card_img" mat-card-md-image src="{{ Game.imageLink }}" />
+  </mat-card-title-group>
   <mat-card-content>
     {{ Game.description }}
   </mat-card-content>
+  <mat-divider></mat-divider>
   <mat-card-actions class="buttons">
-    <button mat-stroked-button color="primary">Créer une partie</button>
-    <button mat-stroked-button color="accent">Trouver une partie</button>
+    <button *ngIf="CanCreate" mat-stroked-button color="primary">
+      Créer une partie
+    </button>
+    <button
+      *ngIf="CanCreate"
+      mat-stroked-button
+      color="secondary"
+      (click)="versionGameDialog()"
+    >
+      Stock
+    </button>
+    <button
+      *ngIf="CanModify"
+      mat-stroked-button
+      color="accent"
+      (click)="updateGameDialog()"
+    >
+      Modifier
+    </button>
   </mat-card-actions>
 </mat-card>

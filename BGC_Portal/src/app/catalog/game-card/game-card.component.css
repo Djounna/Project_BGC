@@ -1,5 +1,6 @@
-.example-card {
-  max-width: 400px;
+.game-card {
+  max-width: 300px;
+  min-width: 300px;
   margin-bottom: 8px;
   margin-right: 18px;
 }
@@ -7,6 +8,14 @@
 .buttons {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-content: space-between;
+}
+
+.game-card_titleGroup {
+  margin: 1em;
+}
+
+.game-card_img {
+  margin-left: 2em;
 }

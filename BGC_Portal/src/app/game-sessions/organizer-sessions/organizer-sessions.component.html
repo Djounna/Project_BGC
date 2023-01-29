@@ -1,4 +1,4 @@
-<mat-toolbar class="sessions-toolbar" color="primary">
+<mat-toolbar class="sessions-toolbar" color="accent">
   <button
     mat-icon-button
     class="example-icon"
@@ -6,7 +6,7 @@
   >
     <mat-icon>menu</mat-icon>
   </button>
-  <span>Toutes les parties</span>
+  <span>Mes parties en tant qu'organisateur</span>
   <span class="example-spacer"></span>
   <button
     mat-icon-button
@@ -23,16 +23,15 @@
     <mat-icon>share</mat-icon>
   </button>
 </mat-toolbar>
-
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <ng-container matColumnDef="Name">
     <th mat-header-cell *matHeaderCellDef>Nom</th>
-    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.Name }}</td>
   </ng-container>
 
   <ng-container matColumnDef="Description">
     <th mat-header-cell *matHeaderCellDef>Description</th>
-    <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.Description }}</td>
   </ng-container>
 
   <ng-container matColumnDef="MinNumberPlayer">

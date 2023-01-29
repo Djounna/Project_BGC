@@ -27,6 +27,7 @@ public class MemberConfiguration : IEntityTypeConfiguration<Member>
 {
     public void Configure(EntityTypeBuilder<Member> builder)
     {
+        builder.HasIndex(n => n.Name, "Name");builder.HasIndex(n => n.Email, "Email");
         builder.Property(m => m.Name).IsRequired().HasMaxLength(50);
         builder.Property(m => m.Email).IsRequired().HasMaxLength(50);
         //builder.Property(m => m.Password).IsRequired().HasMaxLength(50);
