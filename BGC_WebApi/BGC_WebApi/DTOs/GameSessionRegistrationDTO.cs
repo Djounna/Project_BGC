@@ -17,7 +17,7 @@ public class GameSessionRegistrationDTO
     /// <summary>
     /// Player
     /// </summary>
-    public MemberDTO Player { get; set; }
+    public MemberDTO? Player { get; set; }
     /// <summary>
     /// Id of the game session
     /// </summary>
@@ -25,5 +25,5 @@ public class GameSessionRegistrationDTO
     /// <summary>
     /// Game session
     /// </summary>
-    public GameSessionDTO GameSession { get; set; }
+    public GameSessionDTO? GameSession { get; set; }
 }

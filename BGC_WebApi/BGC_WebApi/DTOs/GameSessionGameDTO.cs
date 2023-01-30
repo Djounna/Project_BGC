@@ -17,7 +17,7 @@ public class GameSessionGameDTO
     /// <summary>
     /// game session
     /// </summary>
-    public GameSessionDTO GameSession { get; set; }
+    public GameSessionDTO? GameSession { get; set; }
     /// <summary>
     /// id of the game version
     /// </summary>
@@ -25,5 +25,5 @@ public class GameSessionGameDTO
     /// <summary>
     /// game version
     /// </summary>
-    public GameVersionDTO GameVersion { get; set; }
+    public GameVersionDTO? GameVersion { get; set; }
 }
