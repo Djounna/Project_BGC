@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { Subscription } from 'rxjs';
-import { GameSessionDto } from 'src/app/api/models';
+import { GameSessionDto, MemberDto } from 'src/app/api/models';
 import { GameSessionService } from 'src/app/api/services';
 
 @Component({
@@ -12,8 +12,7 @@ import { GameSessionService } from 'src/app/api/services';
 export class MemberSessionsComponent implements OnInit {
   @Input() allGameSessions: GameSessionDto[] = [];
   public memberGameSessions: GameSessionDto[] = [];
-  public memberId?: number = 0;
-  public memberName?: string = '';
+  @Input() public member: MemberDto = {};
   dataSource: any;
   sub!: Subscription;
   subSessions!: Subscription;
@@ -23,6 +22,7 @@ export class MemberSessionsComponent implements OnInit {
     'Description',
     'MinNumberPlayer',
     'MaxNumberPlayer',
+    'Schedule',
   ];
 
   constructor(
@@ -32,6 +32,7 @@ export class MemberSessionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.memberGameSessions = this.allGameSessions;
+    this.dataSource = this.allGameSessions;
     // this.sub = this.authService.user$.subscribe({
     //   next: (res) => {
     //     console.log(res);

@@ -30,20 +30,35 @@ export class NavbarComponent implements OnInit {
   }
 
   checkAndCreateUser(): void {
+    debugger;
     var member: MemberDto = {};
-    member.memberId = 0;
     this.authSrv.user$.subscribe({
       next: (res) => {
-        member.name = res?.name;
+        member.name = res?.nickname;
         member.email = res?.email;
+        console.log(member.name);
+        console.log(member.email);
         this.memberService
           .apiMemberCheckUserExistsPost$Json({ body: member })
-          .subscribe();
-      },
-      error: (res) => {
-        console.log(res);
+          .subscribe({
+            complete: () => console.log('Check User info ok'),
+          });
       },
     });
+    // var member: MemberDto = {};
+    // member.memberId = 0;
+    // this.authSrv.user$.subscribe({
+    //   next: (res) => {
+    //     member.name = res?.name;
+    //     member.email = res?.email;
+    //     this.memberService
+    //       .apiMemberCheckUserExistsPost$Json({ body: member })
+    //       .subscribe();
+    //   },
+    //   error: (res) => {
+    //     console.log(res);
+    //   },
+    // });
   }
 
   OpenDialogLogout(): void {

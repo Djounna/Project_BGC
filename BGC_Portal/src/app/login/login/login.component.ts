@@ -58,15 +58,21 @@ export class LoginComponent implements OnInit {
   }
 
   checkAndCreateUser(): void {
+    debugger;
     var member!: MemberDto;
-    member.name = 'test';
-    member.email = 'test';
-    this.memberService
-      .apiMemberCheckUserExistsPost$Json({ body: member })
-      .subscribe(() => {
-        next:;
-        error:;
-      });
+    this.getUser().subscribe({
+      next: (res) => {
+        member.name = res?.nickname;
+        member.email = res?.email;
+        console.log(member.name);
+        console.log(member.email);
+        this.memberService
+          .apiMemberCheckUserExistsPost$Json({ body: member })
+          .subscribe({
+            complete: () => console.log('Check User info ok'),
+          });
+      },
+    });
   }
 
   logout() {

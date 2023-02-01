@@ -19,6 +19,10 @@ public class MemberDTO
     /// Email address
     /// </summary>
     public string Email { get; set; }
+    /// <summary>
+    /// Id Auth0
+    /// </summary>
+    public int AuthId { get; set; }
 
     ///// <summary>
     ///// Password

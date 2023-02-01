@@ -5,6 +5,7 @@ using BGC_DataAccess.Interfaces;
 using BGC_DataAccess.Services;
 using BGC_WebApi.DTOs;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -52,6 +53,7 @@ public class MemberController : BaseController
     /// <param name="email">Email</param>
     [HttpGet]
     [Route("{email}")]
+    [EnableCors("_myAllowSpecificOrigins")]
     public async Task<ActionResult<MemberDTO>> GetByEmail(string email)
     {
         return Ok(mapper.Map<MemberDTO>(await memberService.GetByEmail(email)));

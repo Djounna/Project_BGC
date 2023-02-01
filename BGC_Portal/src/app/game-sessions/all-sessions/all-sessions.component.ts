@@ -10,7 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./all-sessions.component.css'],
 })
 export class AllSessionsComponent implements OnInit {
-  public AllGameSessions: GameSessionDto[] = [];
+  allGameSessions: GameSessionDto[] = [];
   subSessions!: Subscription;
   dataSource: any;
   displayedColumns: string[] = [
@@ -18,6 +18,7 @@ export class AllSessionsComponent implements OnInit {
     'Description',
     'MinNumberPlayer',
     'MaxNumberPlayer',
+    'Schedule',
   ];
 
   constructor(private gameSessionService: GameSessionService) {}
@@ -27,8 +28,8 @@ export class AllSessionsComponent implements OnInit {
       .apiGameSessionGet$Json()
       .subscribe({
         next: (res) => {
-          this.AllGameSessions = res;
-          this.dataSource = this.AllGameSessions;
+          this.allGameSessions = res;
+          this.dataSource = this.allGameSessions;
         },
         error: (err) => console.log(err),
       });
